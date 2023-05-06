@@ -12,9 +12,9 @@ function NavItem({ item }: { item: INavItem }) {
   const { href, label, children, image } = item;
 
   return (
-    <li class="group flex items-center w-full max-w-[160px] hover:bg-black">
+    <li class="group/navitem flex items-center w-full max-w-[160px] hover:bg-black">
       <a href={href} class="px-4 py-3 w-full flex justify-center">
-        <span class="group-hover:underline font-bold group-hover:text-white">
+        <span class="group-hover/navitem:underline font-bold group-hover/navitem:text-white">
           {label}
         </span>
       </a>

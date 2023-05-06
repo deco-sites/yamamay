@@ -1,4 +1,5 @@
 import Button from "../ui/Button.tsx";
+import Icon from "./Icon.tsx";
 
 interface Props {
   quantity: number;
@@ -33,15 +34,15 @@ function QuantitySelector({ onChange, quantity, disabled, loading }: Props) {
     <div class="form-control">
       <div class="input-group">
         <Button
-          class="btn-square btn-outline"
+          class="bg-transparent h-[32px] min-h-[32px] w-[32px] border-transparent px-0 text-black hover:bg-transparent hover:border-transparent"
           onClick={decrement}
           disabled={disabled}
           loading={loading}
         >
-          -
+          <Icon id="Minus" width={20} height={20} strokeWidth={1} />
         </Button>
         <input
-          class="input border-base-content border-x-0 text-center"
+          class="input border-base-content text-center h-[32px] w-[32px] text-black p-0"
           type="number"
           inputMode="numeric"
           pattern="[0-9]*"
@@ -52,12 +53,12 @@ function QuantitySelector({ onChange, quantity, disabled, loading }: Props) {
           onBlur={(e) => onChange?.(e.currentTarget.valueAsNumber)}
         />
         <Button
-          class="btn-square btn-outline"
+          class="bg-transparent h-[32px] min-h-[32px] w-[32px] border-transparent px-0 text-black hover:bg-transparent hover:border-transparent"
           onClick={increment}
           disabled={disabled}
           loading={loading}
         >
-          +
+          <Icon id="Plus" width={20} height={20} strokeWidth={1} />
         </Button>
       </div>
     </div>
