@@ -80,7 +80,7 @@ export type Props = EditableProps & {
 };
 
 function Searchbar({
-  placeholder = "What are you looking for?",
+  placeholder = "Search",
   action = "/s",
   name = "q",
   query,
@@ -108,31 +108,17 @@ function Searchbar({
     : products;
 
   return (
-    <div class="flex flex-col p-4 md:py-6 md:px-20">
+    <div class="flex flex-col p-4">
       <div class="flex items-center gap-4">
         <form
           id="searchbar"
           action={action}
-          class="flex-grow flex gap-3 px-3 py-2 border border-base-200"
+          class="flex-grow flex gap-3 bg-white "
         >
-          <Button
-            class="btn-ghost"
-            aria-label="Search"
-            htmlFor="searchbar"
-            tabIndex={-1}
-          >
-            <Icon
-              class="text-base-300"
-              id="MagnifyingGlass"
-              width={20}
-              height={20}
-              strokeWidth={0.01}
-            />
-          </Button>
           <input
             ref={searchInputRef}
             id="search-input"
-            class="flex-grow outline-none placeholder-shown:sibling:hidden"
+            class="flex-grow outline-none placeholder-shown:sibling:hidden text-xs placeholder:text-primary pl-4"
             name={name}
             defaultValue={query}
             onInput={(e) => {
@@ -152,7 +138,22 @@ function Searchbar({
             aria-controls="search-suggestion"
             autocomplete="off"
           />
-          <button
+          <Button
+            class="btn-ghost h-[28px] min-h-[28px] px-[11px]"
+            aria-label="Search"
+            htmlFor="searchbar"
+            tabIndex={-1}
+          >
+            <Icon
+              class="text-primary"
+              id="MagnifyingGlass"
+              width={20}
+              height={20}
+              strokeWidth={1}
+            />
+          </Button>
+          {
+            /* <button
             type="button"
             aria-label="Clean search"
             class="focus:outline-none"
@@ -166,9 +167,10 @@ function Searchbar({
             }}
           >
             <span class="text-sm">limpar</span>
-          </button>
+          </button> */
+          }
         </form>
-        {variant === "desktop" && <CloseButton />}
+        {/* {variant === "desktop" && <CloseButton />} */}
       </div>
       <div class="flex flex-col gap-6 divide-y divide-base-200 mt-6 empty:mt-0 md:flex-row md:divide-y-0">
         {searches && searches.length > 0 && !hasSuggestions && (

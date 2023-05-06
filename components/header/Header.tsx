@@ -45,6 +45,8 @@ export interface Props {
    * @title Enable Top Search terms
    */
   suggestions?: LoaderReturnType<Suggestion | null>;
+
+  logo: Image;
 }
 
 function Header(
@@ -54,6 +56,7 @@ function Header(
     products,
     navItems = [],
     suggestions,
+    logo,
   }: Props,
 ) {
   const searchbar = { ..._searchbar, products, suggestions };
@@ -62,7 +65,7 @@ function Header(
       <header style={{ height: headerHeight }}>
         <div class="bg-base-100 fixed w-full z-50">
           <Alert alerts={alerts} />
-          <Navbar items={navItems} searchbar={searchbar} />
+          <Navbar items={navItems} logo={logo} searchbar={searchbar} />
         </div>
 
         <Modals

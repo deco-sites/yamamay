@@ -12,9 +12,9 @@ function NavItem({ item }: { item: INavItem }) {
   const { href, label, children, image } = item;
 
   return (
-    <li class="group flex items-center">
-      <a href={href} class="px-4 py-3">
-        <span class="group-hover:underline">
+    <li class="group flex items-center w-full max-w-[160px] hover:bg-black">
+      <a href={href} class="px-4 py-3 w-full flex justify-center">
+        <span class="group-hover:underline font-bold group-hover:text-white">
           {label}
         </span>
       </a>
@@ -22,27 +22,18 @@ function NavItem({ item }: { item: INavItem }) {
       {children && children.length > 0 &&
         (
           <div
-            class="fixed hidden hover:flex group-hover:flex bg-base-100 z-50 items-start justify-center gap-6 border-t border-b-2 border-base-200 w-screen"
-            style={{ top: "0px", left: "0px", marginTop: headerHeight }}
+            class="absolute flex group-hover:z-10 bg-base-100 z-50 items-start justify-center gap-6 border-t border-b-2 border-base-200 w-screen translate-x-[-50%]"
+            style={{ top: "100%", left: "50%" }}
           >
-            {image?.src && (
-              <Image
-                class="p-6"
-                src={image.src}
-                alt={image.alt}
-                width={300}
-                height={332}
-                loading="lazy"
-              />
-            )}
             <ul class="flex items-start justify-center gap-6">
               {children.map((node) => (
-                <li class="p-6">
-                  <a class="hover:underline" href={node.href}>
+                <li class="py-3">
+                  <a class="hover:underline text-sm" href={node.href}>
                     <span>{node.label}</span>
                   </a>
 
-                  <ul class="flex flex-col gap-1 mt-4">
+                  {
+                    /* <ul class="flex gap-1 mt-4">
                     {node.children?.map((leaf) => (
                       <li>
                         <a class="hover:underline" href={leaf.href}>
@@ -50,7 +41,8 @@ function NavItem({ item }: { item: INavItem }) {
                         </a>
                       </li>
                     ))}
-                  </ul>
+                  </ul> */
+                  }
                 </li>
               ))}
             </ul>
