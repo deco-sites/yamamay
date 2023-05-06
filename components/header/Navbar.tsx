@@ -20,29 +20,44 @@ function Navbar({ items, searchbar, logo }: {
       {/* Mobile Version */}
       <div
         style={{ height: navbarHeight }}
-        class="md:hidden flex flex-row justify-between items-center border-b border-base-200 w-full pl-2 pr-6 gap-2"
+        class="md:hidden flex flex-row justify-between items-center border-b border-base-200 w-full gap-2 bg-primary text-white"
       >
-        <HeaderButton variant="menu" />
-
-        <a
-          href="/"
-          class="flex-grow inline-flex items-center"
-          style={{ minHeight: navbarHeight }}
-          aria-label="Store logo"
-        >
-          <Icon id="Logo" width={126} height={16} />
-        </a>
-
-        <div class="flex gap-1">
+        <div class="flex flex-1 gap-1">
+          <HeaderButton variant="menu" />
           <HeaderButton variant="search" />
+        </div>
+        <div class="flex-1 flex items-center justify-center w-44">
+          <a
+            href="/"
+            class="flex-grow inline-flex items-center"
+            style={{ minHeight: navbarHeight }}
+            aria-label="Store logo"
+          >
+            <Image src={logo} width={145} height={39} />
+          </a>
+        </div>
+        <div class="flex flex-1 gap-1 justify-end">
+          <a
+            class="btn btn-square btn-ghost"
+            href="/wishlist"
+            aria-label="Wishlist"
+          >
+            <Icon
+              id="Heart"
+              width={24}
+              height={24}
+              strokeWidth={2}
+              fill="none"
+            />
+          </a>
           <HeaderButton variant="cart" />
         </div>
       </div>
 
       {/* Desktop Version */}
-      <div>
+      <div class="hidden md:flex flex-col">
         <div class="bg-primary text-white">
-          <div class="hidden md:flex flex-row justify-between items-center w-full pl-2 pr-6 max-w-[1190px] mx-auto">
+          <div class="flex flex-row justify-between items-center w-full pl-2 pr-6 max-w-[1190px] mx-auto">
             <div class="flex-1 flex items-center justify-start gap-11">
               <Button class="text-xs btn btn-ghost normal-case gap-4">
                 italy - english{" "}

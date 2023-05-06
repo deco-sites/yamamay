@@ -35,14 +35,16 @@ function CartItem({ index }: Props) {
   const isGift = sellingPrice < 0.01;
 
   return (
-    <div class="flex flex-row justify-between items-stretch  gap-4 py-6">
-      <Image
-        src={imageUrl}
-        alt={skuName}
-        width={115}
-        height={115}
-        class="object-cover object-center"
-      />
+    <div class="flex flex-row justify-between items-stretch gap-4 py-6">
+      <div>
+        <Image
+          src={imageUrl}
+          alt={skuName}
+          width={115}
+          height={115}
+          class="object-cover object-center"
+        />
+      </div>
       <div class="flex-1">
         <span class="font-bold">{name}</span>
         <div class="flex items-center gap-2">

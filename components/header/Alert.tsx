@@ -28,11 +28,11 @@ function Alert({ alerts = [], interval = 5 }: Props) {
           ))}
         </Slider>
 
-        <Slider.PrevButton class="absolute top-1/2 translate-y-[-50%] left-0">
+        <Slider.PrevButton class="hidden lg:flex absolute top-1/2 translate-y-[-50%] left-0">
           <Icon size={20} id="ChevronLeft" strokeWidth={1} />
         </Slider.PrevButton>
 
-        <Slider.NextButton class="absolute top-1/2 translate-y-[-50%] right-0">
+        <Slider.NextButton class="hidden lg:flex absolute top-1/2 translate-y-[-50%] right-0">
           <Icon size={20} id="ChevronRight" strokeWidth={1} />
         </Slider.NextButton>
 
