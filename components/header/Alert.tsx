@@ -16,7 +16,7 @@ function Alert({ alerts = [], interval = 5 }: Props) {
   const id = useId();
 
   return (
-    <div id={id} class=" bg-[#efefef]">
+    <div id={id} class="bg-[#efefef] group-[.micro]:hidden">
       <div class="max-w-[1336px] relative mx-auto">
         <Slider class="carousel carousel-center h-[50px] flex items-center gap-6 scrollbar-none">
           {alerts.map((alert, index) => (

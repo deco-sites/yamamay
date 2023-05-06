@@ -15,6 +15,7 @@ import * as $$$$$5 from "./islands/HeaderSearchMenu.tsx";
 import * as $$$$$6 from "./islands/HeaderModals.tsx";
 import * as $$$$$7 from "./islands/ProductImageZoom.tsx";
 import * as $$$$$8 from "./islands/SearchControls.tsx";
+import * as $$$$$9 from "./islands/ScrollTrackJS.tsx";
 import * as $$$$$$$$0 from "./sections/Carousel.tsx";
 import * as $$$$$$$$1 from "./sections/LinkTree.tsx";
 import * as $$$$$$$$2 from "./sections/BannerGrid.tsx";
@@ -113,6 +114,7 @@ const manifest = {
     "./islands/HeaderModals.tsx": $$$$$6,
     "./islands/HeaderSearchMenu.tsx": $$$$$5,
     "./islands/ProductImageZoom.tsx": $$$$$7,
+    "./islands/ScrollTrackJS.tsx": $$$$$9,
     "./islands/SearchControls.tsx": $$$$$8,
     "./islands/ShippingSimulation.tsx": $$$$$0,
     "./islands/SliderJS.tsx": $$$$$4,

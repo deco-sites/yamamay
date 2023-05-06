@@ -45,6 +45,7 @@
               "./islands/HeaderModals.tsx",
               "./islands/HeaderSearchMenu.tsx",
               "./islands/ProductImageZoom.tsx",
+              "./islands/ScrollTrackJS.tsx",
               "./islands/SearchControls.tsx",
               "./islands/ShippingSimulation.tsx",
               "./islands/SliderJS.tsx",
@@ -5495,6 +5496,22 @@
         }
       }
     },
+    "Li9pc2xhbmRzL1Njcm9sbFRyYWNrSlMudHN4": {
+      "title": "./islands/ScrollTrackJS.tsx",
+      "type": "object",
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/ScrollTrackJS.tsx"
+          ],
+          "default": "./islands/ScrollTrackJS.tsx"
+        }
+      }
+    },
     "Li9pc2xhbmRzL1NlYXJjaENvbnRyb2xzLnRzeA==": {
       "title": "./islands/SearchControls.tsx",
       "type": "object",
@@ -6578,6 +6595,9 @@
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL1Byb2R1Y3RJbWFnZVpvb20udHN4"
+        },
+        {
+          "$ref": "#/definitions/Li9pc2xhbmRzL1Njcm9sbFRyYWNrSlMudHN4"
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL1NlYXJjaENvbnRyb2xzLnRzeA=="
