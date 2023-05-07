@@ -1,5 +1,9 @@
 import { Picture, Source } from "deco-sites/std/components/Picture.tsx";
 import type { Image as LiveImage } from "deco-sites/std/components/types.ts";
+import Slider from "deco-sites/fashion/components/ui/Slider.tsx";
+import SliderJS from "deco-sites/fashion/islands/SliderJS.tsx";
+import { useId } from "preact/hooks";
+import Icon from "./Icon.tsx";
 
 export interface Banner {
   srcMobile: LiveImage;
@@ -12,6 +16,7 @@ export interface Banner {
    * @description When you click you go to
    */
   href: string;
+  title: string;
 }
 
 export type BorderRadius =
@@ -33,7 +38,7 @@ export interface Props {
     /** @default 2 */
     mobile?: 1 | 2;
     /** @default 4 */
-    desktop?: 1 | 2 | 4 | 6 | 8;
+    desktop?: 1 | 2 | 3 | 4 | 6 | 8;
   };
   /**
    * @description Item's border radius in px
@@ -55,7 +60,8 @@ const MOBILE_COLUMNS = {
 const DESKTOP_COLUMNS = {
   1: "sm:grid-cols-1",
   2: "sm:grid-cols-2",
-  4: "sm:grid-cols-4",
+  3: "sm:w-[33.333%] px-[4.5px]",
+  4: "sm:w-[25%] px-[4.5px]",
   6: "sm:grid-cols-6",
   8: "sm:grid-cols-8",
 };
@@ -88,55 +94,96 @@ export default function BannnerGrid({
   borderRadius,
   banners = [],
 }: Props) {
+  const id = useId();
+
   return (
     <section class="container w-full px-4 md:px-0 mx-auto">
       {title &&
         (
-          <div class="py-6 md:py-0 md:pb-[40px] flex items-center mt-6">
-            <h2 class="text-lg leading-5 font-semibold uppercase">
+          <div class="py-6 md:py-0 md:pb-[40px] flex items-center justify-center mt-6">
+            <h2 class="text-4xl font-semibold uppercase max-w-[580px] text-center">
               {title}
             </h2>
-
-            <div class="bg-[#e5e5ea] h-[1px] w-full ml-4"></div>
           </div>
         )}
-      <div
+      {
+        /* <div
         class={`grid gap-4 md:gap-6 ${
           MOBILE_COLUMNS[itemsPerLine.mobile ?? 2]
         } ${DESKTOP_COLUMNS[itemsPerLine.desktop ?? 4]}`}
-      >
-        {banners.map(({ href, srcMobile, srcDesktop, alt }) => (
-          <a
-            href={href}
-            class={`overflow-hidden ${
-              RADIUS_MOBILE[borderRadius.mobile ?? "none"]
-            } ${RADIUS_DESKTOP[borderRadius.desktop ?? "none"]} `}
-          >
-            <Picture>
-              <Source
-                media="(max-width: 767px)"
-                src={srcMobile}
-                width={100}
-                height={100}
-              />
-              <Source
-                media="(min-width: 768px)"
-                src={srcDesktop ? srcDesktop : srcMobile}
-                width={250}
-                height={250}
-              />
-              <img
-                class="w-full"
-                sizes="(max-width: 640px) 100vw, 30vw"
-                src={srcMobile}
-                alt={alt}
-                decoding="async"
-                loading="lazy"
-              />
-            </Picture>
-          </a>
-        ))}
+      > */
+      }
+      <div id={id} class="px-14 relative">
+        <Slider class="carousel carousel-center w-full col-span-full row-span-full">
+          {banners.map(({ href, srcMobile, srcDesktop, alt, title }, index) => (
+            <Slider.Item
+              index={index}
+              class={`carousel-item ${
+                DESKTOP_COLUMNS[itemsPerLine.desktop ?? 3]
+              }`}
+            >
+              <a
+                href={href}
+                class={`overflow-hidden ${
+                  RADIUS_MOBILE[borderRadius.mobile ?? "none"]
+                } ${RADIUS_DESKTOP[borderRadius.desktop ?? "none"]} `}
+              >
+                <Picture>
+                  <Source
+                    media="(max-width: 767px)"
+                    src={srcMobile}
+                    width={100}
+                    height={100}
+                  />
+                  <Source
+                    media="(min-width: 768px)"
+                    src={srcDesktop ?? srcMobile}
+                    width={391}
+                    height={412}
+                  />
+                  <img
+                    class="w-full"
+                    sizes="(max-width: 640px) 100vw, 30vw"
+                    src={srcMobile}
+                    alt={alt}
+                    decoding="async"
+                    loading="lazy"
+                  />
+                </Picture>
+                <div class="my-4">
+                  <span class="uppercase text-lg font-bold underline">
+                    {title}
+                  </span>
+                </div>
+              </a>
+            </Slider.Item>
+          ))}
+        </Slider>
+
+        <div class="flex items-center justify-center z-10 absolute top-1/2 -translate-y-1/2 left-0">
+          <Slider.PrevButton class="btn btn-circle border-transparent bg-white">
+            <Icon
+              class=""
+              size={30}
+              id="ChevronLeft"
+              strokeWidth={3}
+            />
+          </Slider.PrevButton>
+        </div>
+        <div class="flex items-center justify-center z-10 absolute top-1/2 -translate-y-1/2 right-0">
+          <Slider.NextButton class="btn btn-circle border-transparent bg-white">
+            <Icon
+              class=""
+              size={30}
+              id="ChevronRight"
+              strokeWidth={3}
+            />
+          </Slider.NextButton>
+        </div>
+
+        <SliderJS rootId={id} />
       </div>
+      {/* </div> */}
     </section>
   );
 }

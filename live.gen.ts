@@ -4,6 +4,7 @@
 
 import config from "./deno.json" assert { type: "json" };
 import { DecoManifest } from "$live/types.ts";
+import * as $0 from "./functions/vtexLoadMultipleProductLists.ts";
 import * as $$$$0 from "./routes/_app.tsx";
 import * as $$$$1 from "./routes/api/[...catchall].tsx";
 import * as $$$$$0 from "./islands/ShippingSimulation.tsx";
@@ -20,17 +21,21 @@ import * as $$$$$$$$0 from "./sections/Carousel.tsx";
 import * as $$$$$$$$1 from "./sections/LinkTree.tsx";
 import * as $$$$$$$$2 from "./sections/BannerGrid.tsx";
 import * as $$$$$$$$3 from "./sections/CookieConsent.tsx";
-import * as $$$$$$$$4 from "./sections/Highlights.tsx";
-import * as $$$$$$$$5 from "./sections/DesignSystem.tsx";
-import * as $$$$$$$$6 from "./sections/Footer.tsx";
-import * as $$$$$$$$7 from "./sections/WishlistGallery.tsx";
-import * as $$$$$$$$8 from "./sections/Features.tsx";
-import * as $$$$$$$$9 from "./sections/SearchResult.tsx";
-import * as $$$$$$$$10 from "./sections/BannerPLP.tsx";
-import * as $$$$$$$$11 from "./sections/Header.tsx";
-import * as $$$$$$$$12 from "./sections/ProductDetails.tsx";
-import * as $$$$$$$$13 from "./sections/ProductShelf.tsx";
-import * as $$$$$$$$14 from "./sections/WhatsApp.tsx";
+import * as $$$$$$$$4 from "./sections/BannerWithTextFull.tsx";
+import * as $$$$$$$$5 from "./sections/Highlights.tsx";
+import * as $$$$$$$$6 from "./sections/DesignSystem.tsx";
+import * as $$$$$$$$7 from "./sections/Footer.tsx";
+import * as $$$$$$$$8 from "./sections/WishlistGallery.tsx";
+import * as $$$$$$$$9 from "./sections/Features.tsx";
+import * as $$$$$$$$10 from "./sections/SearchResult.tsx";
+import * as $$$$$$$$11 from "./sections/BannerPLP.tsx";
+import * as $$$$$$$$12 from "./sections/BannerWithText.tsx";
+import * as $$$$$$$$13 from "./sections/Header.tsx";
+import * as $$$$$$$$14 from "./sections/ProductDetails.tsx";
+import * as $$$$$$$$15 from "./sections/ProductShelf.tsx";
+import * as $$$$$$$$16 from "./sections/ProductTabbedShelf.tsx";
+import * as $$$$$$$$17 from "./sections/BannerFull.tsx";
+import * as $$$$$$$$18 from "./sections/WhatsApp.tsx";
 import * as $live_middleware from "$live/routes/_middleware.ts";
 import * as $live_workbench from "$live/routes/live/workbench.ts";
 import * as $live_invoke from "$live/routes/live/invoke/index.ts";
@@ -95,6 +100,30 @@ import * as i2$$$$10 from "deco-sites/std/sections/SEOPDP.tsx";
 import * as i2$$$$11 from "deco-sites/std/sections/SEOPLP.tsx";
 
 const manifest = {
+  "functions": {
+    "deco-sites/std/functions/occProductDetailsPage.ts": i2$0,
+    "deco-sites/std/functions/segment.ts": i2$1,
+    "deco-sites/std/functions/shopifyProductDetailsPage.ts": i2$2,
+    "deco-sites/std/functions/shopifyProductList.ts": i2$3,
+    "deco-sites/std/functions/shopifyProductListingPage.ts": i2$4,
+    "deco-sites/std/functions/slugFromParams.ts": i2$5,
+    "deco-sites/std/functions/vndaProductDetailsPage.ts": i2$6,
+    "deco-sites/std/functions/vndaProductList.ts": i2$7,
+    "deco-sites/std/functions/vndaProductListingPage.ts": i2$8,
+    "deco-sites/std/functions/vtexClient.ts": i2$9,
+    "deco-sites/std/functions/vtexConfig.ts": i2$10,
+    "deco-sites/std/functions/vtexLegacyProductDetailsPage.ts": i2$11,
+    "deco-sites/std/functions/vtexLegacyProductList.ts": i2$12,
+    "deco-sites/std/functions/vtexLegacyProductListingPage.ts": i2$13,
+    "deco-sites/std/functions/vtexLegacyRelatedProductsLoader.ts": i2$14,
+    "deco-sites/std/functions/vtexNavbar.ts": i2$15,
+    "deco-sites/std/functions/vtexProductDetailsPage.ts": i2$16,
+    "deco-sites/std/functions/vtexProductList.ts": i2$17,
+    "deco-sites/std/functions/vtexProductListingPage.ts": i2$18,
+    "deco-sites/std/functions/vtexSuggestions.ts": i2$19,
+    "deco-sites/std/functions/vtexWishlist.ts": i2$20,
+    "deco-sites/yamamay/functions/vtexLoadMultipleProductLists.ts": $0,
+  },
   "routes": {
     "./routes/_app.tsx": $$$$0,
     "./routes/_middleware.ts": $live_middleware,
@@ -133,21 +162,25 @@ const manifest = {
     "deco-sites/std/sections/SEO.tsx": i2$$$$9,
     "deco-sites/std/sections/SEOPDP.tsx": i2$$$$10,
     "deco-sites/std/sections/SEOPLP.tsx": i2$$$$11,
+    "deco-sites/yamamay/sections/BannerFull.tsx": $$$$$$$$17,
     "deco-sites/yamamay/sections/BannerGrid.tsx": $$$$$$$$2,
-    "deco-sites/yamamay/sections/BannerPLP.tsx": $$$$$$$$10,
+    "deco-sites/yamamay/sections/BannerPLP.tsx": $$$$$$$$11,
+    "deco-sites/yamamay/sections/BannerWithText.tsx": $$$$$$$$12,
+    "deco-sites/yamamay/sections/BannerWithTextFull.tsx": $$$$$$$$4,
     "deco-sites/yamamay/sections/Carousel.tsx": $$$$$$$$0,
     "deco-sites/yamamay/sections/CookieConsent.tsx": $$$$$$$$3,
-    "deco-sites/yamamay/sections/DesignSystem.tsx": $$$$$$$$5,
-    "deco-sites/yamamay/sections/Features.tsx": $$$$$$$$8,
-    "deco-sites/yamamay/sections/Footer.tsx": $$$$$$$$6,
-    "deco-sites/yamamay/sections/Header.tsx": $$$$$$$$11,
-    "deco-sites/yamamay/sections/Highlights.tsx": $$$$$$$$4,
+    "deco-sites/yamamay/sections/DesignSystem.tsx": $$$$$$$$6,
+    "deco-sites/yamamay/sections/Features.tsx": $$$$$$$$9,
+    "deco-sites/yamamay/sections/Footer.tsx": $$$$$$$$7,
+    "deco-sites/yamamay/sections/Header.tsx": $$$$$$$$13,
+    "deco-sites/yamamay/sections/Highlights.tsx": $$$$$$$$5,
     "deco-sites/yamamay/sections/LinkTree.tsx": $$$$$$$$1,
-    "deco-sites/yamamay/sections/ProductDetails.tsx": $$$$$$$$12,
-    "deco-sites/yamamay/sections/ProductShelf.tsx": $$$$$$$$13,
-    "deco-sites/yamamay/sections/SearchResult.tsx": $$$$$$$$9,
-    "deco-sites/yamamay/sections/WhatsApp.tsx": $$$$$$$$14,
-    "deco-sites/yamamay/sections/WishlistGallery.tsx": $$$$$$$$7,
+    "deco-sites/yamamay/sections/ProductDetails.tsx": $$$$$$$$14,
+    "deco-sites/yamamay/sections/ProductShelf.tsx": $$$$$$$$15,
+    "deco-sites/yamamay/sections/ProductTabbedShelf.tsx": $$$$$$$$16,
+    "deco-sites/yamamay/sections/SearchResult.tsx": $$$$$$$$10,
+    "deco-sites/yamamay/sections/WhatsApp.tsx": $$$$$$$$18,
+    "deco-sites/yamamay/sections/WishlistGallery.tsx": $$$$$$$$8,
   },
   "handlers": {
     "$live/handlers/devPage.ts": i2$$$$$0,
@@ -170,29 +203,6 @@ const manifest = {
   "flags": {
     "$live/flags/audience.ts": i2$$$$$$$$0,
     "$live/flags/everyone.ts": i2$$$$$$$$1,
-  },
-  "functions": {
-    "deco-sites/std/functions/occProductDetailsPage.ts": i2$0,
-    "deco-sites/std/functions/segment.ts": i2$1,
-    "deco-sites/std/functions/shopifyProductDetailsPage.ts": i2$2,
-    "deco-sites/std/functions/shopifyProductList.ts": i2$3,
-    "deco-sites/std/functions/shopifyProductListingPage.ts": i2$4,
-    "deco-sites/std/functions/slugFromParams.ts": i2$5,
-    "deco-sites/std/functions/vndaProductDetailsPage.ts": i2$6,
-    "deco-sites/std/functions/vndaProductList.ts": i2$7,
-    "deco-sites/std/functions/vndaProductListingPage.ts": i2$8,
-    "deco-sites/std/functions/vtexClient.ts": i2$9,
-    "deco-sites/std/functions/vtexConfig.ts": i2$10,
-    "deco-sites/std/functions/vtexLegacyProductDetailsPage.ts": i2$11,
-    "deco-sites/std/functions/vtexLegacyProductList.ts": i2$12,
-    "deco-sites/std/functions/vtexLegacyProductListingPage.ts": i2$13,
-    "deco-sites/std/functions/vtexLegacyRelatedProductsLoader.ts": i2$14,
-    "deco-sites/std/functions/vtexNavbar.ts": i2$15,
-    "deco-sites/std/functions/vtexProductDetailsPage.ts": i2$16,
-    "deco-sites/std/functions/vtexProductList.ts": i2$17,
-    "deco-sites/std/functions/vtexProductListingPage.ts": i2$18,
-    "deco-sites/std/functions/vtexSuggestions.ts": i2$19,
-    "deco-sites/std/functions/vtexWishlist.ts": i2$20,
   },
   "accounts": {
     "deco-sites/std/accounts/occ.ts": i2$$0,

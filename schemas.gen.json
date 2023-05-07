@@ -33,6 +33,7 @@
               "deco-sites/std/functions/vtexProductListingPage.ts",
               "deco-sites/std/functions/vtexSuggestions.ts",
               "deco-sites/std/functions/vtexWishlist.ts",
+              "deco-sites/yamamay/functions/vtexLoadMultipleProductLists.ts",
               "deco-sites/std/accounts/occ.ts",
               "deco-sites/std/accounts/shopify.ts",
               "deco-sites/std/accounts/vnda.ts",
@@ -67,8 +68,11 @@
               "deco-sites/std/sections/SEO.tsx",
               "deco-sites/std/sections/SEOPDP.tsx",
               "deco-sites/std/sections/SEOPLP.tsx",
+              "deco-sites/yamamay/sections/BannerFull.tsx",
               "deco-sites/yamamay/sections/BannerGrid.tsx",
               "deco-sites/yamamay/sections/BannerPLP.tsx",
+              "deco-sites/yamamay/sections/BannerWithText.tsx",
+              "deco-sites/yamamay/sections/BannerWithTextFull.tsx",
               "deco-sites/yamamay/sections/Carousel.tsx",
               "deco-sites/yamamay/sections/CookieConsent.tsx",
               "deco-sites/yamamay/sections/DesignSystem.tsx",
@@ -79,6 +83,7 @@
               "deco-sites/yamamay/sections/LinkTree.tsx",
               "deco-sites/yamamay/sections/ProductDetails.tsx",
               "deco-sites/yamamay/sections/ProductShelf.tsx",
+              "deco-sites/yamamay/sections/ProductTabbedShelf.tsx",
               "deco-sites/yamamay/sections/SearchResult.tsx",
               "deco-sites/yamamay/sections/WhatsApp.tsx",
               "deco-sites/yamamay/sections/WishlistGallery.tsx",
@@ -2530,6 +2535,132 @@
       ],
       "title": "deco-sites/std/functions/vtexWishlist.ts@Props"
     },
+    "ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[][]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[]"
+      },
+      "title": "Product[][]"
+    },
+    "ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[][]|null": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/Resolvable"
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[][]"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "title": "Product list loader",
+          "description": "Usefull for shelves and static galleries.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz@Props"
+            }
+          ],
+          "required": [
+            "__resolveType"
+          ],
+          "properties": {
+            "__resolveType": {
+              "type": "string",
+              "enum": [
+                "deco-sites/yamamay/functions/vtexLoadMultipleProductLists.ts"
+              ],
+              "default": "deco-sites/yamamay/functions/vtexLoadMultipleProductLists.ts"
+            }
+          }
+        }
+      ]
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz@QueryProps": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "query to use on search",
+          "title": "Query"
+        },
+        "count": {
+          "type": "number",
+          "description": "total number of items to display",
+          "title": "Count"
+        },
+        "sort": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": ""
+            },
+            {
+              "type": "string",
+              "const": "price:desc"
+            },
+            {
+              "type": "string",
+              "const": "price:asc"
+            },
+            {
+              "type": "string",
+              "const": "orders:desc"
+            },
+            {
+              "type": "string",
+              "const": "name:desc"
+            },
+            {
+              "type": "string",
+              "const": "name:asc"
+            },
+            {
+              "type": "string",
+              "const": "release:desc"
+            },
+            {
+              "type": "string",
+              "const": "discount:desc"
+            }
+          ],
+          "type": "string",
+          "description": "search sort parameter",
+          "title": "Sort"
+        },
+        "collection": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Collection ID or (Product Cluster id). For more info: https://developers.vtex.com/docs/api-reference/search-api#get-/api/catalog_system/pub/products/search .",
+          "pattern": "\\d*",
+          "title": "Collection"
+        }
+      },
+      "required": [
+        "query",
+        "count"
+      ],
+      "title": "QueryProps"
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz@Props": {
+      "type": "object",
+      "properties": {
+        "queries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz@QueryProps"
+          },
+          "title": "Queries"
+        }
+      },
+      "required": [
+        "queries"
+      ],
+      "title": "deco-sites/yamamay/functions/vtexLoadMultipleProductLists.ts@Props"
+    },
     "ZGVjby1zaXRlcy9zdGQvY29tbWVyY2Uvb2NjL2NsaWVudC50cw==@ConfigOCC": {
       "type": "object",
       "allOf": [
@@ -3147,6 +3278,65 @@
       "format": "image-uri",
       "title": "Image"
     },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyRnVsbC50c3g=@Banner": {
+      "type": "object",
+      "properties": {
+        "desktop": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+          "description": "desktop otimized image",
+          "title": "Desktop"
+        },
+        "mobile": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+          "description": "mobile otimized image",
+          "title": "Mobile"
+        },
+        "alt": {
+          "type": "string",
+          "description": "Image's alt text",
+          "title": "Alt"
+        },
+        "href": {
+          "type": "string",
+          "description": "when user clicks on the image, go to this link",
+          "title": "Href"
+        },
+        "label": {
+          "type": "string",
+          "description": "Link label",
+          "title": "Label"
+        }
+      },
+      "required": [
+        "desktop",
+        "mobile",
+        "alt",
+        "href",
+        "label"
+      ],
+      "title": "Banner"
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyRnVsbC50c3g=@Props": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyRnVsbC50c3g=@Banner",
+          "title": "Image"
+        },
+        "preload": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Check this option when this banner is the biggest image on the screen for image optimizations",
+          "title": "Preload"
+        }
+      },
+      "required": [
+        "image"
+      ],
+      "title": "deco-sites/yamamay/components/ui/BannerFull.tsx@Props"
+    },
     "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyR3JpZC50c3g=@Banner": {
       "type": "object",
       "properties": {
@@ -3167,12 +3357,17 @@
           "type": "string",
           "description": "When you click you go to",
           "title": "Href"
+        },
+        "title": {
+          "type": "string",
+          "title": "Title"
         }
       },
       "required": [
         "srcMobile",
         "alt",
-        "href"
+        "href",
+        "title"
       ],
       "title": "Banner"
     },
@@ -3219,6 +3414,10 @@
                 {
                   "type": "number",
                   "const": 2
+                },
+                {
+                  "type": "number",
+                  "const": 3
                 },
                 {
                   "type": "number",
@@ -3414,6 +3613,164 @@
       },
       "required": [],
       "title": "deco-sites/yamamay/components/ui/BannerPLP.tsx@Props"
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyV2l0aFRleHQudHN4@Banner": {
+      "type": "object",
+      "properties": {
+        "desktop": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+          "description": "desktop otimized image",
+          "title": "Desktop"
+        },
+        "mobile": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+          "description": "mobile otimized image",
+          "title": "Mobile"
+        },
+        "alt": {
+          "type": "string",
+          "description": "Image's alt text",
+          "title": "Alt"
+        },
+        "href": {
+          "type": "string",
+          "description": "when user clicks on the image, go to this link",
+          "title": "Href"
+        },
+        "label": {
+          "type": "string",
+          "description": "Link label",
+          "title": "Label"
+        }
+      },
+      "required": [
+        "desktop",
+        "mobile",
+        "alt",
+        "href",
+        "label"
+      ],
+      "title": "Banner"
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyV2l0aFRleHQudHN4@Props": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyV2l0aFRleHQudHN4@Banner",
+          "title": "Image"
+        },
+        "preload": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Check this option when this banner is the biggest image on the screen for image optimizations",
+          "title": "Preload"
+        },
+        "title": {
+          "type": "string",
+          "title": "Title"
+        },
+        "subtitle": {
+          "type": "string",
+          "title": "Subtitle"
+        },
+        "buttonLabel": {
+          "type": "string",
+          "title": "Button Label"
+        },
+        "href": {
+          "type": "string",
+          "title": "Href"
+        }
+      },
+      "required": [
+        "image",
+        "title",
+        "subtitle",
+        "buttonLabel",
+        "href"
+      ],
+      "title": "deco-sites/yamamay/components/ui/BannerWithText.tsx@Props"
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyV2l0aFRleHRGdWxsLnRzeA==@Banner": {
+      "type": "object",
+      "properties": {
+        "desktop": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+          "description": "desktop otimized image",
+          "title": "Desktop"
+        },
+        "mobile": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@Image",
+          "description": "mobile otimized image",
+          "title": "Mobile"
+        },
+        "alt": {
+          "type": "string",
+          "description": "Image's alt text",
+          "title": "Alt"
+        },
+        "href": {
+          "type": "string",
+          "description": "when user clicks on the image, go to this link",
+          "title": "Href"
+        },
+        "label": {
+          "type": "string",
+          "description": "Link label",
+          "title": "Label"
+        }
+      },
+      "required": [
+        "desktop",
+        "mobile",
+        "alt",
+        "href",
+        "label"
+      ],
+      "title": "Banner"
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyV2l0aFRleHRGdWxsLnRzeA==@Props": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyV2l0aFRleHRGdWxsLnRzeA==@Banner",
+          "title": "Image"
+        },
+        "preload": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Check this option when this banner is the biggest image on the screen for image optimizations",
+          "title": "Preload"
+        },
+        "title": {
+          "type": "string",
+          "title": "Title"
+        },
+        "subtitle": {
+          "type": "string",
+          "title": "Subtitle"
+        },
+        "buttonLabel": {
+          "type": "string",
+          "title": "Button Label"
+        },
+        "href": {
+          "type": "string",
+          "title": "Href"
+        }
+      },
+      "required": [
+        "image",
+        "title",
+        "subtitle",
+        "buttonLabel",
+        "href"
+      ],
+      "title": "deco-sites/yamamay/components/ui/BannerWithTextFull.tsx@Props"
     },
     "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyQ2Fyb3VzZWwudHN4@Banner": {
       "type": "object",
@@ -4595,6 +4952,39 @@
       ],
       "title": "deco-sites/yamamay/components/product/ProductShelf.tsx@Props"
     },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvcHJvZHVjdC9Qcm9kdWN0VGFiYmVkU2hlbGYudHN4@Props": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Title"
+        },
+        "products": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[][]|null",
+          "title": "Products"
+        },
+        "itemsPerPage": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "title": "Items Per Page"
+        },
+        "shelfTitles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Shelf Titles"
+        }
+      },
+      "required": [
+        "title",
+        "products",
+        "shelfTitles"
+      ],
+      "title": "deco-sites/yamamay/components/product/ProductTabbedShelf.tsx@Props"
+    },
     "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvcHJvZHVjdC9Qcm9kdWN0R2FsbGVyeS50c3g=@Columns": {
       "type": "object",
       "properties": {
@@ -5264,6 +5654,28 @@
             "deco-sites/std/functions/vtexWishlist.ts"
           ],
           "default": "deco-sites/std/functions/vtexWishlist.ts"
+        }
+      }
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz": {
+      "title": "Product list loader",
+      "description": "Usefull for shelves and static galleries.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/yamamay/functions/vtexLoadMultipleProductLists.ts"
+          ],
+          "default": "deco-sites/yamamay/functions/vtexLoadMultipleProductLists.ts"
         }
       }
     },
@@ -5938,6 +6350,27 @@
         }
       }
     },
+    "ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL0Jhbm5lckZ1bGwudHN4": {
+      "title": "deco-sites/yamamay/sections/BannerFull.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyRnVsbC50c3g=@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/yamamay/sections/BannerFull.tsx"
+          ],
+          "default": "deco-sites/yamamay/sections/BannerFull.tsx"
+        }
+      }
+    },
     "ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL0Jhbm5lckdyaWQudHN4": {
       "title": "deco-sites/yamamay/sections/BannerGrid.tsx",
       "type": "object",
@@ -5977,6 +6410,48 @@
             "deco-sites/yamamay/sections/BannerPLP.tsx"
           ],
           "default": "deco-sites/yamamay/sections/BannerPLP.tsx"
+        }
+      }
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL0Jhbm5lcldpdGhUZXh0LnRzeA==": {
+      "title": "deco-sites/yamamay/sections/BannerWithText.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyV2l0aFRleHQudHN4@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/yamamay/sections/BannerWithText.tsx"
+          ],
+          "default": "deco-sites/yamamay/sections/BannerWithText.tsx"
+        }
+      }
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL0Jhbm5lcldpdGhUZXh0RnVsbC50c3g=": {
+      "title": "deco-sites/yamamay/sections/BannerWithTextFull.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvQmFubmVyV2l0aFRleHRGdWxsLnRzeA==@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/yamamay/sections/BannerWithTextFull.tsx"
+          ],
+          "default": "deco-sites/yamamay/sections/BannerWithTextFull.tsx"
         }
       }
     },
@@ -6182,6 +6657,27 @@
             "deco-sites/yamamay/sections/ProductShelf.tsx"
           ],
           "default": "deco-sites/yamamay/sections/ProductShelf.tsx"
+        }
+      }
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL1Byb2R1Y3RUYWJiZWRTaGVsZi50c3g=": {
+      "title": "deco-sites/yamamay/sections/ProductTabbedShelf.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvcHJvZHVjdC9Qcm9kdWN0VGFiYmVkU2hlbGYudHN4@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/yamamay/sections/ProductTabbedShelf.tsx"
+          ],
+          "default": "deco-sites/yamamay/sections/ProductTabbedShelf.tsx"
         }
       }
     },
@@ -6535,6 +7031,9 @@
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvZnVuY3Rpb25zL3Z0ZXhXaXNobGlzdC50cw=="
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz"
         }
       ]
     },
@@ -6687,10 +7186,19 @@
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvc2VjdGlvbnMvU0VPUExQLnRzeA=="
         },
         {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL0Jhbm5lckZ1bGwudHN4"
+        },
+        {
           "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL0Jhbm5lckdyaWQudHN4"
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL0Jhbm5lclBMUC50c3g="
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL0Jhbm5lcldpdGhUZXh0LnRzeA=="
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL0Jhbm5lcldpdGhUZXh0RnVsbC50c3g="
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL0Nhcm91c2VsLnRzeA=="
@@ -6721,6 +7229,9 @@
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL1Byb2R1Y3RTaGVsZi50c3g="
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL1Byb2R1Y3RUYWJiZWRTaGVsZi50c3g="
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL1NlYXJjaFJlc3VsdC50c3g="
