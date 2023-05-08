@@ -46,6 +46,8 @@
               "./islands/HeaderModals.tsx",
               "./islands/HeaderSearchMenu.tsx",
               "./islands/ProductImageZoom.tsx",
+              "./islands/QuantityAddToCartButton.tsx",
+              "./islands/QuantitySelector.tsx",
               "./islands/Quickview.tsx",
               "./islands/ScrollTrackJS.tsx",
               "./islands/SearchControls.tsx",
@@ -5952,6 +5954,38 @@
         }
       }
     },
+    "Li9pc2xhbmRzL1F1YW50aXR5QWRkVG9DYXJ0QnV0dG9uLnRzeA==": {
+      "title": "./islands/QuantityAddToCartButton.tsx",
+      "type": "object",
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/QuantityAddToCartButton.tsx"
+          ],
+          "default": "./islands/QuantityAddToCartButton.tsx"
+        }
+      }
+    },
+    "Li9pc2xhbmRzL1F1YW50aXR5U2VsZWN0b3IudHN4": {
+      "title": "./islands/QuantitySelector.tsx",
+      "type": "object",
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/QuantitySelector.tsx"
+          ],
+          "default": "./islands/QuantitySelector.tsx"
+        }
+      }
+    },
     "Li9pc2xhbmRzL1F1aWNrdmlldy50c3g=": {
       "title": "./islands/Quickview.tsx",
       "type": "object",
@@ -7175,6 +7209,12 @@
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL1Byb2R1Y3RJbWFnZVpvb20udHN4"
+        },
+        {
+          "$ref": "#/definitions/Li9pc2xhbmRzL1F1YW50aXR5QWRkVG9DYXJ0QnV0dG9uLnRzeA=="
+        },
+        {
+          "$ref": "#/definitions/Li9pc2xhbmRzL1F1YW50aXR5U2VsZWN0b3IudHN4"
         },
         {
           "$ref": "#/definitions/Li9pc2xhbmRzL1F1aWNrdmlldy50c3g="

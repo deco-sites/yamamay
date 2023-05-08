@@ -17,6 +17,7 @@ import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/product
 import ProductSelector from "./ProductVariantSelector.tsx";
 import ProductImageZoom from "deco-sites/fashion/islands/ProductImageZoom.tsx";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
+import QuantityAddToCartButton from "deco-sites/yamamay/islands/QuantityAddToCartButton.tsx";
 
 export type Variant = "front-back" | "slider" | "auto";
 
@@ -29,8 +30,8 @@ export interface Props {
   variant?: Variant;
 }
 
-const WIDTH = 360;
-const HEIGHT = 500;
+const WIDTH = 586;
+const HEIGHT = 667;
 const ASPECT_RATIO = `${WIDTH} / ${HEIGHT}`;
 
 /**
@@ -58,51 +59,62 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
     description,
     productID,
     offers,
-    name,
-    gtin,
+    // name,
+    // gtin,
     isVariantOf,
+    // additionalProperty,
   } = product;
+  const { name, additionalProperty } = isVariantOf ?? {};
   const { price, listPrice, seller, installments } = useOffer(offers);
+  const hasDiscount = price !== listPrice;
+  const discount = ((listPrice ?? 0) - (price ?? 0)) * 100 / (listPrice ?? 0);
+
+  console.log(additionalProperty);
+
+  const washingCare = additionalProperty?.find((prop) =>
+    prop.name === "Washing care"
+  );
+
+  const details = additionalProperty?.filter((prop) =>
+    prop.name !== "Washing care" && prop.name !== "sellerId"
+  );
 
   return (
-    <>
-      {/* Breadcrumb */}
-      <Breadcrumb
-        itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}
-      />
+    <div class="sticky top-[180px] ">
       {/* Code and name */}
-      <div class="mt-4 sm:mt-8">
-        <div>
-          <span class="text-sm text-base-300">
-            Cod. {gtin}
-          </span>
-        </div>
+      <div class="mt-4 sm:mt-8 ">
         <h1>
-          <span class="font-medium text-xl">{name}</span>
+          <span class=" text-base">{name}</span>
         </h1>
       </div>
       {/* Prices */}
       <div class="mt-4">
         <div class="flex flex-row gap-2 items-center">
-          <span class="line-through text-base-300 text-xs">
-            {formatPrice(listPrice, offers!.priceCurrency!)}
-          </span>
-          <span class="font-medium text-xl text-secondary">
+          <span class="font-medium text-xl text-primary">
             {formatPrice(price, offers!.priceCurrency!)}
           </span>
+          <span class="line-through text-neutral-300 text-xl">
+            {formatPrice(listPrice, offers!.priceCurrency!)}
+          </span>
+          {hasDiscount && discount &&
+            (
+              <span class="text-base">
+                {Math.round(discount)}%
+              </span>
+            )}
         </div>
         <span class="text-sm text-base-300">
           {installments}
         </span>
       </div>
       {/* Sku Selector */}
-      <div class="mt-4 sm:mt-6">
+      <div class="mt-4 sm:mt-6 border-t">
         <ProductSelector product={product} />
       </div>
       {/* Add to Cart and Favorites button */}
-      <div class="mt-4 sm:mt-10 flex flex-col gap-2">
+      <div class="flex pt-4 flex-col gap-2 border-t">
         {seller && (
-          <AddToCartButton
+          <QuantityAddToCartButton
             skuId={productID}
             sellerId={seller}
             price={price ?? 0}
@@ -111,14 +123,10 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
             productGroupId={product.isVariantOf?.productGroupID ?? ""}
           />
         )}
-        <WishlistButton
-          variant="full"
-          productGroupID={isVariantOf?.productGroupID}
-          productID={productID}
-        />
       </div>
       {/* Shipping Simulation */}
-      <div class="mt-8">
+      {
+        /* <div class="mt-8">
         <ShippingSimulation
           items={[{
             id: Number(product.sku),
@@ -126,18 +134,120 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
             seller: seller ?? "1",
           }]}
         />
-      </div>
+      </div> */
+      }
       {/* Description card */}
       <div class="mt-4 sm:mt-6">
-        <span class="text-sm">
-          {description && (
-            <details>
-              <summary class="cursor-pointer">Descrição</summary>
-              <div class="ml-2 mt-2">{description}</div>
+        <span class="cursor-pointer uppercase text-sm list-none flex justify-between item-center group-open/description">
+          Description
+        </span>
+        <div class="">
+          <span class="text-sm">
+            {description}
+          </span>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <span class="text-base">
+          {washingCare?.value && (
+            <details class="group/description border-y">
+              <summary class="cursor-pointer list-none flex justify-between h-[47px] items-center group-open/description pl-10 pr-2">
+                Garment Care
+                <Icon
+                  id="ChevronDown"
+                  width={20}
+                  height={20}
+                  strokeWidth={1}
+                />
+              </summary>
+              <div
+                class="[&>img]:w-[24px] [&>img]:m-[.35rem_.5rem_-.25rem_0] [&>img]:inline text-xs px-10 pt-3 pb-4"
+                dangerouslySetInnerHTML={{ __html: washingCare.value }}
+              >
+              </div>
             </details>
           )}
         </span>
       </div>
+
+      <div class="">
+        <span class="text-base">
+          {!!details?.length && (
+            <details class="group/details border-y">
+              <summary class="cursor-pointer list-none flex justify-between h-[47px] items-center  pl-10 pr-2">
+                Details
+                <Icon
+                  id="ChevronDown"
+                  width={20}
+                  height={20}
+                  strokeWidth={1}
+                  class="group-open/details:rotate-180 transition-all"
+                />
+              </summary>
+              <ul class="text-sm flex flex-col px-10 pt-3 pb-4 gap-3">
+                {details.map((detail) => (
+                  <li>
+                    <span class="font-bold">{detail.name}</span>:{" "}
+                    <span>{detail.value}</span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </span>
+      </div>
+      <div class="">
+        <span class="text-base">
+          {!!details?.length && (
+            <details class="group/details border-y">
+              <summary class="cursor-pointer list-none flex justify-between h-[47px] items-center  pl-10 pr-2">
+                Shipping and Returns
+                <Icon
+                  id="ChevronDown"
+                  width={20}
+                  height={20}
+                  strokeWidth={1}
+                  class="group-open/details:rotate-180 transition-all"
+                />
+              </summary>
+              <ul class="text-sm flex flex-col px-10 pt-3 pb-4 gap-5">
+                <li class="flex">
+                  <div class="min-w-[40px] flex">
+                    <Icon
+                      id="Truck"
+                      width={29}
+                      height={29}
+                    />
+                  </div>
+                  <div class="leading-[1.5]">
+                    Delivery takes place on average within 3 working days from
+                    the order in Italy and in the EU and within 6 days for all
+                    other destinations. For details on shipping times click
+                    here.
+                  </div>
+                </li>
+                <li class="flex">
+                  <div class="min-w-[40px] flex">
+                    <Icon
+                      id="Return"
+                      width={20}
+                      height={20}
+                    />
+                  </div>
+                  <div class="leading-[1.5]">
+                    If you are not satisfied with your purchase, you have 14
+                    days from the date you received your order to return the
+                    purchased products. To exercise the right of withdrawal, the
+                    items must not be used or washed.
+                  </div>
+                </li>
+              </ul>
+            </details>
+          )}
+        </span>
+      </div>
+
       <SendEventOnLoad
         event={{
           name: "view_item",
@@ -153,7 +263,7 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
           },
         }}
       />
-    </>
+    </div>
   );
 }
 
@@ -162,7 +272,10 @@ function Details({
   variant,
 }: { page: ProductDetailsPage; variant: Variant }) {
   const id = `product-image-gallery:${useId()}`;
-  const { product: { image: images = [] } } = page;
+  const {
+    product: { image: images = [], isVariantOf, id: productID },
+    breadcrumbList,
+  } = page;
 
   /**
    * Product slider variant
@@ -174,18 +287,35 @@ function Details({
   if (variant === "slider") {
     return (
       <>
+        {/* Breadcrumb */}
+        <Breadcrumb
+          itemListElement={breadcrumbList?.itemListElement}
+        />
         <div
           id={id}
-          class="grid grid-cols-1 gap-4 sm:grid-cols-[max-content_40vw_40vw] sm:grid-rows-1 sm:justify-center"
+          class="flex justify-between"
         >
           {/* Image Slider */}
-          <div class="relative sm:col-start-2 sm:col-span-1 sm:row-start-1">
-            <Slider class="carousel gap-6">
+          <div class="relative flex gap-[10px] items-start">
+            {/* Dots */}
+            <ul class="flex gap-[10px] sm:justify-start  px-4 sm:px-0 sm:flex-col sticky top-[180px]">
               {images.map((img, index) => (
-                <Slider.Item
-                  index={index}
-                  class="carousel-item min-w-[100vw] sm:min-w-[40vw]"
-                >
+                <li class="min-w-[63px] sm:min-w-[104px]">
+                  <Image
+                    style={{ aspectRatio: "1/1" }}
+                    class="group-disabled:border-base-300 border"
+                    width={104}
+                    height={104}
+                    src={img.url!}
+                    alt={img.alternateName}
+                  />
+                </li>
+              ))}
+            </ul>
+
+            <ul class="flex flex-col gap-[10px]">
+              {images.map((img, index) => (
+                <li class="carousel-item w-full max-w-[586px]">
                   <Image
                     class="w-full"
                     sizes="(max-width: 640px) 100vw, 40vw"
@@ -198,47 +328,21 @@ function Details({
                     preload={index === 0}
                     loading={index === 0 ? "eager" : "lazy"}
                   />
-                </Slider.Item>
+                </li>
               ))}
-            </Slider>
-
-            <Slider.PrevButton class="absolute left-2 top-1/2 btn btn-circle btn-outline">
-              <Icon size={20} id="ChevronLeft" strokeWidth={3} />
-            </Slider.PrevButton>
-
-            <Slider.NextButton class="absolute right-2 top-1/2 btn btn-circle btn-outline">
-              <Icon size={20} id="ChevronRight" strokeWidth={3} />
-            </Slider.NextButton>
+            </ul>
 
             <div class="absolute top-2 right-2 bg-base-100 rounded-full">
-              <ProductImageZoom
-                images={images}
-                width={1280}
-                height={1280 * HEIGHT / WIDTH}
+              <WishlistButton
+                variant="icon"
+                productGroupID={isVariantOf?.productGroupID}
+                productID={productID}
               />
             </div>
           </div>
 
-          {/* Dots */}
-          <ul class="flex gap-2 sm:justify-start overflow-auto px-4 sm:px-0 sm:flex-col sm:col-start-1 sm:col-span-1 sm:row-start-1">
-            {images.map((img, index) => (
-              <li class="min-w-[63px] sm:min-w-[100px]">
-                <Slider.Dot index={index}>
-                  <Image
-                    style={{ aspectRatio: ASPECT_RATIO }}
-                    class="group-disabled:border-base-300 border rounded "
-                    width={63}
-                    height={87.5}
-                    src={img.url!}
-                    alt={img.alternateName}
-                  />
-                </Slider.Dot>
-              </li>
-            ))}
-          </ul>
-
           {/* Product Info */}
-          <div class="px-4 sm:pr-0 sm:pl-6 sm:col-start-3 sm:col-span-1 sm:row-start-1">
+          <div class="max-w-[380px] w-full">
             <ProductInfo page={page} />
           </div>
         </div>
@@ -275,7 +379,7 @@ function Details({
       </ul>
 
       {/* Product Info */}
-      <div class="px-4 sm:pr-0 sm:pl-6">
+      <div class="px-4 sm:pr-0 sm:pl-6 ">
         <ProductInfo page={page} />
       </div>
     </div>

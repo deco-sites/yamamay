@@ -10,10 +10,10 @@ function VariantSelector({ product, product: { url } }: Props) {
   const possibilities = useVariantPossibilities(product);
 
   return (
-    <ul class="flex flex-col gap-4">
+    <ul class="flex flex-col gap-6 divide-y">
       {Object.keys(possibilities).map((name) => (
-        <li class="flex flex-col gap-2">
-          <span class="text-sm">{name}</span>
+        <li class="flex flex-col gap-2 px-4 py-2">
+          <span class="text-base">{name}</span>
           <ul class="flex flex-row gap-3">
             {Object.entries(possibilities[name]).map(([value, [link]]) => (
               <li>

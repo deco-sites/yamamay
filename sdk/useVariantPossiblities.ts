@@ -1,5 +1,11 @@
 import type { Product } from "deco-sites/std/commerce/types.ts";
 
+const noVariations = [
+  "cluster",
+  "category",
+  "Taglia",
+];
+
 export const useVariantPossibilities = (
   { url: productUrl, isVariantOf }: Product,
 ) => {
@@ -8,7 +14,9 @@ export const useVariantPossibilities = (
       additionalProperty.map((property) => ({ property, url }))
     )
     .filter((x) => x.url)
-    .sort((a, b) => a.url! < b.url! ? -1 : a.url === b.url ? 0 : 1);
+    .sort((a, b) => a.url! < b.url! ? -1 : a.url === b.url ? 0 : 1).filter((
+      { property },
+    ) => !noVariations.includes(property.name ?? ""));
 
   const possibilities = allProperties.reduce((acc, { property, url }) => {
     const { name = "", value = "" } = property;

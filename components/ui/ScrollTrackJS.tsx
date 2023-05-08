@@ -55,11 +55,11 @@ const setup = ({ rootId, behavior, interval }: Props) => {
   let passed = false;
 
   const addClass = () => {
-    if (globalThis.scrollY >= 300 && !passed) {
+    if (globalThis.scrollY >= 10 && !passed) {
       element.classList.add("micro");
       passed = true;
     }
-    if (globalThis.scrollY < 300) {
+    if (globalThis.scrollY < 10) {
       passed = false;
       element.classList.remove("micro");
     }
