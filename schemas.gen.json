@@ -46,6 +46,7 @@
               "./islands/HeaderModals.tsx",
               "./islands/HeaderSearchMenu.tsx",
               "./islands/ProductImageZoom.tsx",
+              "./islands/Quickview.tsx",
               "./islands/ScrollTrackJS.tsx",
               "./islands/SearchControls.tsx",
               "./islands/ShippingSimulation.tsx",
@@ -85,6 +86,7 @@
               "deco-sites/yamamay/sections/ProductShelf.tsx",
               "deco-sites/yamamay/sections/ProductTabbedShelf.tsx",
               "deco-sites/yamamay/sections/SearchResult.tsx",
+              "deco-sites/yamamay/sections/SearchText.tsx",
               "deco-sites/yamamay/sections/WhatsApp.tsx",
               "deco-sites/yamamay/sections/WishlistGallery.tsx",
               "$live/matchers/MatchAlways.ts",
@@ -5040,6 +5042,48 @@
       ],
       "title": "deco-sites/yamamay/components/search/SearchResult.tsx@Props"
     },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvc2VhcmNoL1NlYXJjaFRleHQudHN4@Text": {
+      "type": "object",
+      "properties": {
+        "matcher": {
+          "type": "string",
+          "description": "RegExp to enable this text on the current URL. Use /feminino/* to display this text on feminino category",
+          "title": "Matcher"
+        },
+        "text": {
+          "type": "string",
+          "description": "text to be rendered",
+          "title": "Text"
+        }
+      },
+      "required": [
+        "matcher",
+        "text"
+      ],
+      "title": "Text"
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvc2VhcmNoL1NlYXJjaFRleHQudHN4@Text[]": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvc2VhcmNoL1NlYXJjaFRleHQudHN4@Text"
+      },
+      "title": "Text[]"
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvc2VhcmNoL1NlYXJjaFRleHQudHN4@Props": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@ProductListingPage|null",
+          "title": "Page"
+        },
+        "texts": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvc2VhcmNoL1NlYXJjaFRleHQudHN4@Text[]",
+          "title": "Texts"
+        }
+      },
+      "required": [],
+      "title": "deco-sites/yamamay/components/search/SearchText.tsx@Props"
+    },
     "ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvdWkvV2hhdHNBcHAudHN4@Props": {
       "type": "object",
       "properties": {
@@ -5908,6 +5952,22 @@
         }
       }
     },
+    "Li9pc2xhbmRzL1F1aWNrdmlldy50c3g=": {
+      "title": "./islands/Quickview.tsx",
+      "type": "object",
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "./islands/Quickview.tsx"
+          ],
+          "default": "./islands/Quickview.tsx"
+        }
+      }
+    },
     "Li9pc2xhbmRzL1Njcm9sbFRyYWNrSlMudHN4": {
       "title": "./islands/ScrollTrackJS.tsx",
       "type": "object",
@@ -6702,6 +6762,27 @@
         }
       }
     },
+    "ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL1NlYXJjaFRleHQudHN4": {
+      "title": "deco-sites/yamamay/sections/SearchText.tsx",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2NvbXBvbmVudHMvc2VhcmNoL1NlYXJjaFRleHQudHN4@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "deco-sites/yamamay/sections/SearchText.tsx"
+          ],
+          "default": "deco-sites/yamamay/sections/SearchText.tsx"
+        }
+      }
+    },
     "ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL1doYXRzQXBwLnRzeA==": {
       "title": "deco-sites/yamamay/sections/WhatsApp.tsx",
       "type": "object",
@@ -7096,6 +7177,9 @@
           "$ref": "#/definitions/Li9pc2xhbmRzL1Byb2R1Y3RJbWFnZVpvb20udHN4"
         },
         {
+          "$ref": "#/definitions/Li9pc2xhbmRzL1F1aWNrdmlldy50c3g="
+        },
+        {
           "$ref": "#/definitions/Li9pc2xhbmRzL1Njcm9sbFRyYWNrSlMudHN4"
         },
         {
@@ -7235,6 +7319,9 @@
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL1NlYXJjaFJlc3VsdC50c3g="
+        },
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL1NlYXJjaFRleHQudHN4"
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L3NlY3Rpb25zL1doYXRzQXBwLnRzeA=="

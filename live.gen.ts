@@ -14,9 +14,10 @@ import * as $$$$$3 from "./islands/HeaderButton.tsx";
 import * as $$$$$4 from "./islands/SliderJS.tsx";
 import * as $$$$$5 from "./islands/HeaderSearchMenu.tsx";
 import * as $$$$$6 from "./islands/HeaderModals.tsx";
-import * as $$$$$7 from "./islands/ProductImageZoom.tsx";
-import * as $$$$$8 from "./islands/SearchControls.tsx";
-import * as $$$$$9 from "./islands/ScrollTrackJS.tsx";
+import * as $$$$$7 from "./islands/Quickview.tsx";
+import * as $$$$$8 from "./islands/ProductImageZoom.tsx";
+import * as $$$$$9 from "./islands/SearchControls.tsx";
+import * as $$$$$10 from "./islands/ScrollTrackJS.tsx";
 import * as $$$$$$$$0 from "./sections/Carousel.tsx";
 import * as $$$$$$$$1 from "./sections/LinkTree.tsx";
 import * as $$$$$$$$2 from "./sections/BannerGrid.tsx";
@@ -26,16 +27,17 @@ import * as $$$$$$$$5 from "./sections/Highlights.tsx";
 import * as $$$$$$$$6 from "./sections/DesignSystem.tsx";
 import * as $$$$$$$$7 from "./sections/Footer.tsx";
 import * as $$$$$$$$8 from "./sections/WishlistGallery.tsx";
-import * as $$$$$$$$9 from "./sections/Features.tsx";
-import * as $$$$$$$$10 from "./sections/SearchResult.tsx";
-import * as $$$$$$$$11 from "./sections/BannerPLP.tsx";
-import * as $$$$$$$$12 from "./sections/BannerWithText.tsx";
-import * as $$$$$$$$13 from "./sections/Header.tsx";
-import * as $$$$$$$$14 from "./sections/ProductDetails.tsx";
-import * as $$$$$$$$15 from "./sections/ProductShelf.tsx";
-import * as $$$$$$$$16 from "./sections/ProductTabbedShelf.tsx";
-import * as $$$$$$$$17 from "./sections/BannerFull.tsx";
-import * as $$$$$$$$18 from "./sections/WhatsApp.tsx";
+import * as $$$$$$$$9 from "./sections/SearchText.tsx";
+import * as $$$$$$$$10 from "./sections/Features.tsx";
+import * as $$$$$$$$11 from "./sections/SearchResult.tsx";
+import * as $$$$$$$$12 from "./sections/BannerPLP.tsx";
+import * as $$$$$$$$13 from "./sections/BannerWithText.tsx";
+import * as $$$$$$$$14 from "./sections/Header.tsx";
+import * as $$$$$$$$15 from "./sections/ProductDetails.tsx";
+import * as $$$$$$$$16 from "./sections/ProductShelf.tsx";
+import * as $$$$$$$$17 from "./sections/ProductTabbedShelf.tsx";
+import * as $$$$$$$$18 from "./sections/BannerFull.tsx";
+import * as $$$$$$$$19 from "./sections/WhatsApp.tsx";
 import * as $live_middleware from "$live/routes/_middleware.ts";
 import * as $live_workbench from "$live/routes/live/workbench.ts";
 import * as $live_invoke from "$live/routes/live/invoke/index.ts";
@@ -142,9 +144,10 @@ const manifest = {
     "./islands/HeaderButton.tsx": $$$$$3,
     "./islands/HeaderModals.tsx": $$$$$6,
     "./islands/HeaderSearchMenu.tsx": $$$$$5,
-    "./islands/ProductImageZoom.tsx": $$$$$7,
-    "./islands/ScrollTrackJS.tsx": $$$$$9,
-    "./islands/SearchControls.tsx": $$$$$8,
+    "./islands/ProductImageZoom.tsx": $$$$$8,
+    "./islands/Quickview.tsx": $$$$$7,
+    "./islands/ScrollTrackJS.tsx": $$$$$10,
+    "./islands/SearchControls.tsx": $$$$$9,
     "./islands/ShippingSimulation.tsx": $$$$$0,
     "./islands/SliderJS.tsx": $$$$$4,
     "./islands/WishlistButton.tsx": $$$$$1,
@@ -162,24 +165,25 @@ const manifest = {
     "deco-sites/std/sections/SEO.tsx": i2$$$$9,
     "deco-sites/std/sections/SEOPDP.tsx": i2$$$$10,
     "deco-sites/std/sections/SEOPLP.tsx": i2$$$$11,
-    "deco-sites/yamamay/sections/BannerFull.tsx": $$$$$$$$17,
+    "deco-sites/yamamay/sections/BannerFull.tsx": $$$$$$$$18,
     "deco-sites/yamamay/sections/BannerGrid.tsx": $$$$$$$$2,
-    "deco-sites/yamamay/sections/BannerPLP.tsx": $$$$$$$$11,
-    "deco-sites/yamamay/sections/BannerWithText.tsx": $$$$$$$$12,
+    "deco-sites/yamamay/sections/BannerPLP.tsx": $$$$$$$$12,
+    "deco-sites/yamamay/sections/BannerWithText.tsx": $$$$$$$$13,
     "deco-sites/yamamay/sections/BannerWithTextFull.tsx": $$$$$$$$4,
     "deco-sites/yamamay/sections/Carousel.tsx": $$$$$$$$0,
     "deco-sites/yamamay/sections/CookieConsent.tsx": $$$$$$$$3,
     "deco-sites/yamamay/sections/DesignSystem.tsx": $$$$$$$$6,
-    "deco-sites/yamamay/sections/Features.tsx": $$$$$$$$9,
+    "deco-sites/yamamay/sections/Features.tsx": $$$$$$$$10,
     "deco-sites/yamamay/sections/Footer.tsx": $$$$$$$$7,
-    "deco-sites/yamamay/sections/Header.tsx": $$$$$$$$13,
+    "deco-sites/yamamay/sections/Header.tsx": $$$$$$$$14,
     "deco-sites/yamamay/sections/Highlights.tsx": $$$$$$$$5,
     "deco-sites/yamamay/sections/LinkTree.tsx": $$$$$$$$1,
-    "deco-sites/yamamay/sections/ProductDetails.tsx": $$$$$$$$14,
-    "deco-sites/yamamay/sections/ProductShelf.tsx": $$$$$$$$15,
-    "deco-sites/yamamay/sections/ProductTabbedShelf.tsx": $$$$$$$$16,
-    "deco-sites/yamamay/sections/SearchResult.tsx": $$$$$$$$10,
-    "deco-sites/yamamay/sections/WhatsApp.tsx": $$$$$$$$18,
+    "deco-sites/yamamay/sections/ProductDetails.tsx": $$$$$$$$15,
+    "deco-sites/yamamay/sections/ProductShelf.tsx": $$$$$$$$16,
+    "deco-sites/yamamay/sections/ProductTabbedShelf.tsx": $$$$$$$$17,
+    "deco-sites/yamamay/sections/SearchResult.tsx": $$$$$$$$11,
+    "deco-sites/yamamay/sections/SearchText.tsx": $$$$$$$$9,
+    "deco-sites/yamamay/sections/WhatsApp.tsx": $$$$$$$$19,
     "deco-sites/yamamay/sections/WishlistGallery.tsx": $$$$$$$$8,
   },
   "handlers": {

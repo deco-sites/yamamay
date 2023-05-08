@@ -7,6 +7,7 @@ import { useVariantPossibilities } from "deco-sites/fashion/sdk/useVariantPossib
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
 import { sendEventOnClick } from "deco-sites/fashion/sdk/analytics.ts";
 import type { Product } from "deco-sites/std/commerce/types.ts";
+import Quickview from "deco-sites/yamamay/islands/Quickview.tsx";
 
 interface Props {
   product: Product;
@@ -21,18 +22,21 @@ function ProductCard({ product, preload, itemListName }: Props) {
   const {
     url,
     productID,
-    name,
+    // name,
     image: images,
     offers,
     isVariantOf,
   } = product;
-  const productGroupID = isVariantOf?.productGroupID;
+  const { productGroupID, name } = isVariantOf ?? {};
   const [front, back] = images ?? [];
   const { listPrice, price } = useOffer(offers);
   const possibilities = useVariantPossibilities(product);
+  console.log({ possibilities });
   const options = Object.entries(
-    possibilities["TAMANHO"] ?? possibilities["Tamanho"] ?? {},
+    possibilities["Color"] ?? possibilities["Tamanho"] ?? {},
   );
+  const hasDiscount = price !== listPrice;
+  const discount = ((listPrice ?? 0) - (price ?? 0)) * 100 / (listPrice ?? 0);
   const clickEvent = {
     name: "select_item" as const,
     params: {
@@ -49,7 +53,7 @@ function ProductCard({ product, preload, itemListName }: Props) {
 
   return (
     <div
-      class="card card-compact card-bordered border-transparent hover:border-base-200 group w-full"
+      class="card card-compact group w-full rounded-none"
       data-deco="view-product"
       id={`product-card-${productID}`}
       {...sendEventOnClick(clickEvent)}
@@ -62,24 +66,48 @@ function ProductCard({ product, preload, itemListName }: Props) {
           <Image
             src={front.url!}
             alt={front.alternateName}
-            width={200}
-            height={279}
-            class="rounded w-full group-hover:hidden"
+            width={274}
+            height={384}
+            class=" w-full"
             preload={preload}
             loading={preload ? "eager" : "lazy"}
             sizes="(max-width: 640px) 50vw, 20vw"
           />
-          <Image
+          {
+            /* <Image
             src={back?.url ?? front.url!}
             alt={back?.alternateName ?? front.alternateName}
             width={200}
             height={279}
             class="rounded w-full hidden group-hover:block"
             sizes="(max-width: 640px) 50vw, 20vw"
-          />
+          /> */
+          }
+          <div class="absolute bottom-0 left-0">
+            <Quickview />
+          </div>
         </a>
-        <figcaption class="glass card-body card-actions absolute bottom-0 left-0 w-full invisible group-hover:visible">
-          <ul class="flex justify-center items-center gap-2 w-full">
+      </figure>
+      <div class="py-2 gap-2">
+        <h2 class="text-sm">{name}</h2>
+        <div class="flex items-center gap-2">
+          <span class={`${hasDiscount ? "text-primary" : ""}  text-base`}>
+            {formatPrice(price, offers!.priceCurrency!)}
+          </span>
+          {hasDiscount && (
+            <span class="line-through text-neutral-300  text-base">
+              {formatPrice(listPrice, offers!.priceCurrency!)}
+            </span>
+          )}
+          {hasDiscount && discount &&
+            (
+              <span class="text-sm">
+                {Math.round(discount)}%
+              </span>
+            )}
+        </div>
+        <figcaption class="card-actions w-full">
+          <ul class="flex items-center gap-2 w-full">
             {options.map(([value, [link]]) => (
               <a href={link}>
                 <Avatar
@@ -90,17 +118,6 @@ function ProductCard({ product, preload, itemListName }: Props) {
             ))}
           </ul>
         </figcaption>
-      </figure>
-      <div class="card-body">
-        <h2 class="card-title whitespace-nowrap overflow-hidden">{name}</h2>
-        <div class="flex items-end gap-2">
-          <span class="line-through text-base-300 text-xs">
-            {formatPrice(listPrice, offers!.priceCurrency!)}
-          </span>
-          <span class="text-secondary">
-            {formatPrice(price, offers!.priceCurrency!)}
-          </span>
-        </div>
       </div>
     </div>
   );

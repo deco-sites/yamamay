@@ -118,7 +118,7 @@ function Searchbar({
           <input
             ref={searchInputRef}
             id="search-input"
-            class="flex-grow outline-none placeholder-shown:sibling:hidden text-xs placeholder:text-primary pl-4"
+            class="flex-grow outline-none placeholder-shown:sibling:hidden text-xs text-primary pl-4"
             name={name}
             defaultValue={query}
             onInput={(e) => {

@@ -26,7 +26,9 @@ function WishlistButton({
 
   return (
     <Button
-      class={variant === "icon" ? "btn-circle btn-ghost" : "btn-outline"}
+      class={variant === "icon"
+        ? "btn-circle btn-ghost group/wishlist"
+        : "btn-outline"}
       loading={fetching.value}
       aria-label="Add to wishlist"
       onClick={async (e) => {
@@ -55,11 +57,19 @@ function WishlistButton({
     >
       <Icon
         id="Heart"
-        size={20}
+        size={24}
         strokeWidth={2}
         fill={inWishlist ? "black" : "none"}
       />
-      {variant === "icon" ? null : inWishlist ? "Remover" : "Favoritar"}
+      {variant === "icon"
+        ? (
+          <span class="absolute underline font-normal opacity-0 normal-case text-xs bg-white transition-all px-1 py-[2px] group-hover/wishlist:opacity-100 group-hover/wishlist:-translate-x-full">
+            Wishlist
+          </span>
+        )
+        : inWishlist
+        ? "Remover"
+        : "Favoritar"}
     </Button>
   );
 }
