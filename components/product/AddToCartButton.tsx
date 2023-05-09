@@ -22,7 +22,7 @@ function AddToCartButton(
     price,
     productGroupId,
     name,
-    quantity
+    quantity,
   });
 
   return (

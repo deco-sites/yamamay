@@ -56,6 +56,7 @@
               "./islands/WishlistButton.tsx",
               "$live/handlers/devPage.ts",
               "$live/handlers/fresh.ts",
+              "$live/handlers/proxy.ts",
               "$live/handlers/router.ts",
               "$live/handlers/routesSelection.ts",
               "$live/pages/LivePage.tsx",
@@ -94,6 +95,7 @@
               "$live/matchers/MatchAlways.ts",
               "$live/matchers/MatchDate.ts",
               "$live/matchers/MatchEnvironment.ts",
+              "$live/matchers/MatchHost.ts",
               "$live/matchers/MatchMulti.ts",
               "$live/matchers/MatchRandom.ts",
               "$live/matchers/MatchSite.ts",
@@ -2929,6 +2931,28 @@
       ],
       "title": "deco-cx/live/handlers/fresh.ts@FreshConfig"
     },
+    "ZGVjby1jeC9saXZlL2hhbmRsZXJzL3Byb3h5LnRz@Props": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "the proxy url.",
+          "title": "Url"
+        },
+        "basePath": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "the base path of the url.",
+          "title": "Base Path"
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "title": "deco-cx/live/handlers/proxy.ts@Props"
+    },
     "ZGVjby1jeC9saXZlL2Jsb2Nrcy9oYW5kbGVyLnRz@Handler": {
       "$ref": "#/root/handlers",
       "title": "Handler"
@@ -5146,6 +5170,27 @@
       ],
       "title": "deco-cx/live/matchers/MatchEnvironment.ts@Props"
     },
+    "ZGVjby1jeC9saXZlL21hdGNoZXJzL01hdGNoSG9zdC50cw==@Props": {
+      "type": "object",
+      "properties": {
+        "includes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Includes"
+        },
+        "match": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "title": "Match"
+        }
+      },
+      "required": [],
+      "title": "deco-cx/live/matchers/MatchHost.ts@Props"
+    },
     "ZGVjby1jeC9saXZlL2Jsb2Nrcy9tYXRjaGVyLnRz@Matcher": {
       "$ref": "#/root/matchers",
       "title": "Matcher"
@@ -6129,6 +6174,27 @@
         }
       }
     },
+    "JGxpdmUvaGFuZGxlcnMvcHJveHkudHM=": {
+      "title": "$live/handlers/proxy.ts",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1jeC9saXZlL2hhbmRsZXJzL3Byb3h5LnRz@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "$live/handlers/proxy.ts"
+          ],
+          "default": "$live/handlers/proxy.ts"
+        }
+      }
+    },
     "JGxpdmUvaGFuZGxlcnMvcm91dGVyLnRz": {
       "title": "$live/handlers/router.ts",
       "type": "object",
@@ -6917,6 +6983,27 @@
         }
       }
     },
+    "JGxpdmUvbWF0Y2hlcnMvTWF0Y2hIb3N0LnRz": {
+      "title": "$live/matchers/MatchHost.ts",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1jeC9saXZlL21hdGNoZXJzL01hdGNoSG9zdC50cw==@Props"
+        }
+      ],
+      "required": [
+        "__resolveType"
+      ],
+      "properties": {
+        "__resolveType": {
+          "type": "string",
+          "enum": [
+            "$live/matchers/MatchHost.ts"
+          ],
+          "default": "$live/matchers/MatchHost.ts"
+        }
+      }
+    },
     "JGxpdmUvbWF0Y2hlcnMvTWF0Y2hNdWx0aS50cw==": {
       "title": "$live/matchers/MatchMulti.ts",
       "type": "object",
@@ -7249,6 +7336,9 @@
           "$ref": "#/definitions/JGxpdmUvaGFuZGxlcnMvZnJlc2gudHM="
         },
         {
+          "$ref": "#/definitions/JGxpdmUvaGFuZGxlcnMvcHJveHkudHM="
+        },
+        {
           "$ref": "#/definitions/JGxpdmUvaGFuZGxlcnMvcm91dGVyLnRz"
         },
         {
@@ -7385,6 +7475,9 @@
         },
         {
           "$ref": "#/definitions/JGxpdmUvbWF0Y2hlcnMvTWF0Y2hFbnZpcm9ubWVudC50cw=="
+        },
+        {
+          "$ref": "#/definitions/JGxpdmUvbWF0Y2hlcnMvTWF0Y2hIb3N0LnRz"
         },
         {
           "$ref": "#/definitions/JGxpdmUvbWF0Y2hlcnMvTWF0Y2hNdWx0aS50cw=="

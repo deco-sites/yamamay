@@ -30,14 +30,15 @@ function QuantityAddToCartButton(
 
   return (
     <div class="flex flex-col w-full gap-4">
-      <QuantitySelector
-        disabled={price === 0}
-        quantity={quantity.value}
-        onChange={(newQuantity) => {
-          quantity.value = newQuantity;
-        }}
-      />
-
+      <div class="hidden lg:flex">
+        <QuantitySelector
+          disabled={price === 0}
+          quantity={quantity.value}
+          onChange={(newQuantity) => {
+            quantity.value = newQuantity;
+          }}
+        />
+      </div>
       <AddToCartButton
         skuId={skuId}
         sellerId={sellerId}

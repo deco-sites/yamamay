@@ -57,9 +57,9 @@ function Navbar({ items, searchbar, logo }: {
       {/* Desktop Version */}
       <div class="hidden md:flex flex-col">
         <div class="bg-primary text-white">
-          <div class="flex flex-row justify-between items-center w-full pl-2 pr-6 max-w-[1190px] mx-auto">
+          <div class="flex flex-row justify-between items-center w-full max-w-[1190px] mx-auto">
             <div class="flex-1 flex items-center justify-start gap-11">
-              <Button class="text-xs btn btn-ghost normal-case gap-4">
+              <Button class="text-xs btn btn-ghost normal-case font-normal gap-4">
                 italy - english{" "}
                 <Icon
                   id="ChevronRight"

@@ -69,8 +69,6 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
   const hasDiscount = price !== listPrice;
   const discount = ((listPrice ?? 0) - (price ?? 0)) * 100 / (listPrice ?? 0);
 
-  console.log(additionalProperty);
-
   const washingCare = additionalProperty?.find((prop) =>
     prop.name === "Washing care"
   );
@@ -82,62 +80,57 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
   return (
     <div class="sticky top-[180px] ">
       {/* Code and name */}
-      <div class="mt-4 sm:mt-8 ">
-        <h1>
-          <span class=" text-base">{name}</span>
-        </h1>
-      </div>
-      {/* Prices */}
-      <div class="mt-4">
-        <div class="flex flex-row gap-2 items-center">
-          <span class="font-medium text-xl text-primary">
-            {formatPrice(price, offers!.priceCurrency!)}
-          </span>
-          <span class="line-through text-neutral-300 text-xl">
-            {formatPrice(listPrice, offers!.priceCurrency!)}
-          </span>
-          {hasDiscount && discount &&
-            (
-              <span class="text-base">
-                {Math.round(discount)}%
+      <div class="fixed bottom-0 bg-white right-0 left-0 lg:static  border-t lg:border-0">
+        <div class="px-4">
+          <div class="mt-4 sm:mt-8 ">
+            <h1>
+              <span class=" text-base">{name}</span>
+            </h1>
+          </div>
+          {/* Prices */}
+          <div class="mt-4">
+            <div class="flex flex-row gap-2 items-center">
+              <span class="font-medium text-xl text-primary">
+                {formatPrice(price, offers!.priceCurrency!)}
               </span>
-            )}
+              <span class="line-through text-neutral-300 text-xl">
+                {formatPrice(listPrice, offers!.priceCurrency!)}
+              </span>
+              {hasDiscount && discount &&
+                (
+                  <span class="text-base">
+                    {Math.round(discount)}%
+                  </span>
+                )}
+            </div>
+            <span class="text-sm text-base-300">
+              {installments}
+            </span>
+          </div>
         </div>
-        <span class="text-sm text-base-300">
-          {installments}
-        </span>
+        <div class="flex lg:flex-col w-full">
+          {/* Sku Selector */}
+          <div class="mt-4 sm:mt-6 border-t">
+            <ProductSelector product={product} />
+          </div>
+
+          {/* Add to Cart and Favorites button */}
+          <div class="flex w-full pt-4 flex-col gap-2 border-t">
+            {seller && (
+              <QuantityAddToCartButton
+                skuId={productID}
+                sellerId={seller}
+                price={price ?? 0}
+                discount={price && listPrice ? listPrice - price : 0}
+                name={product.name ?? ""}
+                productGroupId={product.isVariantOf?.productGroupID ?? ""}
+              />
+            )}
+          </div>
+        </div>
       </div>
-      {/* Sku Selector */}
-      <div class="mt-4 sm:mt-6 border-t">
-        <ProductSelector product={product} />
-      </div>
-      {/* Add to Cart and Favorites button */}
-      <div class="flex pt-4 flex-col gap-2 border-t">
-        {seller && (
-          <QuantityAddToCartButton
-            skuId={productID}
-            sellerId={seller}
-            price={price ?? 0}
-            discount={price && listPrice ? listPrice - price : 0}
-            name={product.name ?? ""}
-            productGroupId={product.isVariantOf?.productGroupID ?? ""}
-          />
-        )}
-      </div>
-      {/* Shipping Simulation */}
-      {
-        /* <div class="mt-8">
-        <ShippingSimulation
-          items={[{
-            id: Number(product.sku),
-            quantity: 1,
-            seller: seller ?? "1",
-          }]}
-        />
-      </div> */
-      }
       {/* Description card */}
-      <div class="mt-4 sm:mt-6">
+      <div class="mt-4 sm:mt-6 px-4 lg:px-0">
         <span class="cursor-pointer uppercase text-sm list-none flex justify-between item-center group-open/description">
           Description
         </span>
@@ -150,10 +143,41 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
 
       <div class="mt-4">
         <span class="text-base">
+          {!!details?.length && (
+            <details class="group/details border-y">
+              <summary class="cursor-pointer list-none flex justify-between h-[47px] items-center pl-10 pr-2">
+                <span class="flex-1 flex justify-center lg:justify-start">
+                  Details
+                </span>
+                <Icon
+                  id="ChevronDown"
+                  width={20}
+                  height={20}
+                  strokeWidth={1}
+                  class="group-open/details:rotate-180 transition-all"
+                />
+              </summary>
+              <ul class="text-sm flex flex-col px-4 lg:px-10  pt-3 pb-4 gap-3">
+                {details.map((detail) => (
+                  <li>
+                    <span class="font-bold">{detail.name}</span>:{" "}
+                    <span>{detail.value}</span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </span>
+      </div>
+
+      <div class="">
+        <span class="text-base">
           {washingCare?.value && (
             <details class="group/description border-y">
               <summary class="cursor-pointer list-none flex justify-between h-[47px] items-center group-open/description pl-10 pr-2">
-                Garment Care
+                <span class="flex-1 flex justify-center lg:justify-start">
+                  Garment Care
+                </span>
                 <Icon
                   id="ChevronDown"
                   width={20}
@@ -162,7 +186,7 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
                 />
               </summary>
               <div
-                class="[&>img]:w-[24px] [&>img]:m-[.35rem_.5rem_-.25rem_0] [&>img]:inline text-xs px-10 pt-3 pb-4"
+                class="[&>img]:w-[24px] [&>img]:m-[.35rem_.5rem_-.25rem_0] [&>img]:inline text-xs px-4 lg:px-10 pt-3 pb-4"
                 dangerouslySetInnerHTML={{ __html: washingCare.value }}
               >
               </div>
@@ -176,7 +200,9 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
           {!!details?.length && (
             <details class="group/details border-y">
               <summary class="cursor-pointer list-none flex justify-between h-[47px] items-center  pl-10 pr-2">
-                Details
+                <span class="flex-1 flex justify-center lg:justify-start">
+                  Shipping and Returns
+                </span>
                 <Icon
                   id="ChevronDown"
                   width={20}
@@ -185,33 +211,7 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
                   class="group-open/details:rotate-180 transition-all"
                 />
               </summary>
-              <ul class="text-sm flex flex-col px-10 pt-3 pb-4 gap-3">
-                {details.map((detail) => (
-                  <li>
-                    <span class="font-bold">{detail.name}</span>:{" "}
-                    <span>{detail.value}</span>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          )}
-        </span>
-      </div>
-      <div class="">
-        <span class="text-base">
-          {!!details?.length && (
-            <details class="group/details border-y">
-              <summary class="cursor-pointer list-none flex justify-between h-[47px] items-center  pl-10 pr-2">
-                Shipping and Returns
-                <Icon
-                  id="ChevronDown"
-                  width={20}
-                  height={20}
-                  strokeWidth={1}
-                  class="group-open/details:rotate-180 transition-all"
-                />
-              </summary>
-              <ul class="text-sm flex flex-col px-10 pt-3 pb-4 gap-5">
+              <ul class="text-sm flex flex-col px-4 lg:px-10 pt-3 pb-4 gap-5">
                 <li class="flex">
                   <div class="min-w-[40px] flex">
                     <Icon
@@ -288,17 +288,19 @@ function Details({
     return (
       <>
         {/* Breadcrumb */}
-        <Breadcrumb
-          itemListElement={breadcrumbList?.itemListElement}
-        />
+        <div class="hidden lg:flex ">
+          <Breadcrumb
+            itemListElement={breadcrumbList?.itemListElement}
+          />
+        </div>
         <div
           id={id}
-          class="flex justify-between"
+          class="flex flex-col lg:flex-row justify-between"
         >
           {/* Image Slider */}
           <div class="relative flex gap-[10px] items-start">
             {/* Dots */}
-            <ul class="flex gap-[10px] sm:justify-start  px-4 sm:px-0 sm:flex-col sticky top-[180px]">
+            <ul class="hidden lg:flex gap-[10px] sm:justify-start  px-4 sm:px-0 sm:flex-col sticky top-[180px]">
               {images.map((img, index) => (
                 <li class="min-w-[63px] sm:min-w-[104px]">
                   <Image
@@ -313,7 +315,7 @@ function Details({
               ))}
             </ul>
 
-            <ul class="flex flex-col gap-[10px]">
+            <ul class="flex flex-col lg:gap-[10px]">
               {images.map((img, index) => (
                 <li class="carousel-item w-full max-w-[586px]">
                   <Image
@@ -399,7 +401,7 @@ function ProductDetails({ page, variant: maybeVar = "auto" }: Props) {
     : maybeVar;
 
   return (
-    <div class="container py-0 sm:py-10">
+    <div class="container py-0 sm:py-10 relative z-10">
       {page ? <Details page={page} variant={variant} /> : <NotFound />}
     </div>
   );
