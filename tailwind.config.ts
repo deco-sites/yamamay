@@ -36,6 +36,9 @@ export default {
         "2xl": "1190px",
       },
     },
+    fontFamily: {
+      "sans": "",
+    },
     extend: {
       animation: {
         "slide-left": "slide-left-frame 0.4s ease normal",

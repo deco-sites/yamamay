@@ -1,8 +1,8 @@
 import { useComputed, useSignal } from "@preact/signals";
 import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import Button from "deco-sites/fashion/components/ui/Button.tsx";
-import { useWishlist } from "deco-sites/std/commerce/vtex/hooks/useWishlist.ts";
-import { useUser } from "deco-sites/std/commerce/vtex/hooks/useUser.ts";
+import { useWishlist } from "deco-sites/std/packs/vtex/hooks/useWishlist.ts";
+import { useUser } from "deco-sites/std/packs/vtex/hooks/useUser.ts";
 
 interface Props {
   productID: string;

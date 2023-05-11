@@ -18,6 +18,7 @@ import ProductSelector from "./ProductVariantSelector.tsx";
 import ProductImageZoom from "deco-sites/fashion/islands/ProductImageZoom.tsx";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
 import QuantityAddToCartButton from "deco-sites/yamamay/islands/QuantityAddToCartButton.tsx";
+import ProductDescription from "deco-sites/yamamay/islands/ProductDescription.tsx";
 
 export type Variant = "front-back" | "slider" | "auto";
 
@@ -129,17 +130,7 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
           </div>
         </div>
       </div>
-      {/* Description card */}
-      <div class="mt-4 sm:mt-6 px-4 lg:px-0">
-        <span class="cursor-pointer uppercase text-sm list-none flex justify-between item-center group-open/description">
-          Description
-        </span>
-        <div class="">
-          <span class="text-sm">
-            {description}
-          </span>
-        </div>
-      </div>
+      <ProductDescription description={description} />
 
       <div class="mt-4">
         <span class="text-base">
