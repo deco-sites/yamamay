@@ -30,7 +30,7 @@ const isIcon = (item: Item): item is IconItem =>
 
 function SectionItem({ item }: { item: Item }) {
   return (
-    <span class="text-sm">
+    <span class="text-base lg:text-sm">
       {isIcon(item)
         ? (
           <div class="border-base-100 border border-solid py-1.5 px-2.5">
@@ -136,7 +136,7 @@ function Footer(
                 <li>
                   <span class="">
                     <details class="group/footer-menu">
-                      <summary class="list-none flex justify-between py-5">
+                      <summary class="list-none flex justify-between py-5 px-24 ">
                         <span class="w-full text-center font-bold">
                           {section.label}
                         </span>
@@ -151,10 +151,10 @@ function Footer(
                       <ul
                         class={`flex ${
                           isIcon(section.children[0]) ? "flex-row" : "flex-col"
-                        } gap-2 px-2 pt-2`}
+                        } gap-2 px-2 pt-2 pb-5`}
                       >
                         {section.children.map((item) => (
-                          <li>
+                          <li class="flex items-center justify-center">
                             <SectionItem item={item} />
                           </li>
                         ))}

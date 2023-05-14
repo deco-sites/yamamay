@@ -286,7 +286,7 @@ function Details({
         </div>
         <div
           id={id}
-          class="flex flex-col lg:flex-row justify-between"
+          class="flex flex-col lg:flex-row justify-between pt-4"
         >
           {/* Image Slider */}
           <div class="relative flex gap-[10px] items-start">
@@ -325,11 +325,12 @@ function Details({
               ))}
             </ul>
 
-            <div class="absolute top-2 right-2 bg-base-100 rounded-full">
+            <div class="absolute top-2 right-2 rounded-full">
               <WishlistButton
                 variant="icon"
                 productGroupID={isVariantOf?.productGroupID}
                 productID={productID}
+                size={30}
               />
             </div>
           </div>
@@ -392,7 +393,7 @@ function ProductDetails({ page, variant: maybeVar = "auto" }: Props) {
     : maybeVar;
 
   return (
-    <div class="container py-0 sm:py-10 relative z-10">
+    <div class="container py-0 sm:py-4 relative z-10">
       {page ? <Details page={page} variant={variant} /> : <NotFound />}
     </div>
   );

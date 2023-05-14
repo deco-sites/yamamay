@@ -6,7 +6,7 @@ interface Props {
   product: Product;
 }
 
-function VariantSelector({ product, product: { url } }: Props) {
+function VariantSelector({ product, product: { url: currentUrl } }: Props) {
   const possibilities = useVariantPossibilities(product);
 
   return (
@@ -15,12 +15,14 @@ function VariantSelector({ product, product: { url } }: Props) {
         <li class="flex flex-col gap-2 px-4 py-2">
           <span class="text-base">{name}</span>
           <ul class="flex flex-row gap-3">
-            {Object.entries(possibilities[name]).map(([value, [link]]) => (
+            {Object.entries(possibilities[name]).map((
+              [value, [{ available, url, id }]],
+            ) => (
               <li>
-                <a href={link}>
+                <a href={url}>
                   <Avatar
                     content={value}
-                    variant={link === url ? "active" : "default"}
+                    variant={url === currentUrl ? "active" : "default"}
                   />
                 </a>
               </li>

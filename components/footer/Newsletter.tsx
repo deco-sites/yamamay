@@ -3,7 +3,7 @@ import Icon from "deco-sites/yamamay/components/ui/Icon.tsx";
 function Newsletter() {
   return (
     <div class="flex flex-col gap-6  py-5">
-      <div class="flex flex-col gap-2 max-w-[400px]">
+      <div class="flex flex-col gap-2 max-w-[450px]">
         <span class="font-normal  text-2xl   lg:text-3xl text-center lg:text-start">
           Newsletter
         </span>
@@ -12,7 +12,7 @@ function Newsletter() {
           receive a 10% DISCOUNT on your next online purchase!
         </span>
       </div>
-      <form class="flex flex-row max-w-[85%] mx-auto lg:mx-0 lg:max-w-none items-center gap-2 font-body text-body w-full sm:w-[408px] border-b border-solid border-black">
+      <form class="flex flex-row max-w-[85%] mx-auto lg:mx-0 lg:max-w-[450px] items-center gap-2 font-body text-body w-full border-b border-solid border-black">
         <input
           class="py-2 flex-grow bg-transparent text-xs lg:text-body"
           placeholder="e-mail"

@@ -45,15 +45,15 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
     <a
       href={href ?? "#"}
       aria-label={label}
-      class="relative h-auto overflow-y-hidden w-1/2 py-5"
+      class="relative h-auto overflow-y-hidden w-full lg:w-1/2 py-5"
     >
       <Picture preload={lcp}>
         <Source
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={mobile}
-          width={360}
-          height={600}
+          width={760}
+          height={780}
         />
         <Source
           media="(min-width: 768px)"
@@ -63,7 +63,7 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
           height={855}
         />
         <img
-          class="object-cover w-full"
+          class="object-cover w-full max-h-[calc(50vh_-_60px)] lg:max-h-none"
           loading={lcp ? "eager" : "lazy"}
           src={desktop}
           alt={alt}
@@ -81,10 +81,10 @@ function BannerFull(
   return (
     <div
       id={id}
-      class="max-w-[1220px] mx-auto flex group/banner my-5"
+      class="max-w-[1220px] mx-auto flex flex-col lg:flex-row group/banner my-5"
     >
       <BannerItem image={image} lcp={preload} />
-      <div class="w-1/2 flex justify-center items-center">
+      <div class="w-full lg:w-1/2 flex justify-center items-center">
         <div class="flex flex-col item-center justify-center px-12 max-w-[560px]">
           <div class="flex justify-center">
             <h2 class="text-5xl leading-[67px] font-bold text-center uppercase max-w-[300px] inline-flex text-black">

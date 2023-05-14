@@ -29,13 +29,18 @@ function NotFound() {
   );
 }
 
+const irrelevantFilter = ["Brand", "Category 2", "Category 4"];
+
 function Result({
   page,
   variant,
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
 
-  console.log(filters);
+  const relevantFilters = filters.filter((filter) =>
+    !irrelevantFilter.includes(filter.label)
+  );
+  // console.log(filters);
 
   return (
     <>
@@ -45,19 +50,12 @@ function Result({
         </div>
         <SearchControls
           sortOptions={sortOptions}
-          filters={filters}
+          filters={relevantFilters}
           breadcrumb={breadcrumb}
           displayFilter={variant === "drawer"}
         />
 
         <div class="flex flex-row">
-          {
-            /* {variant === "aside" && filters.length > 0 && (
-            <aside class="hidden sm:block w-min min-w-[250px]">
-              <Filters filters={filters} />
-            </aside>
-          )} */
-          }
           <div class="flex-grow">
             <ProductGallery products={products} />
           </div>

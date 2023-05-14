@@ -11,7 +11,7 @@ function ProductDescription({ description }: { description?: string }) {
         Description
       </span>
       <div class="">
-        <span class={`text-sm ${open.value ? "" : "line-clamp-1"} `}>
+        <span class={`text-sm ${open.value ? "" : "line-clamp-3"} `}>
           {description}
         </span>
         <button onClick={() => open.value = !open.value}>

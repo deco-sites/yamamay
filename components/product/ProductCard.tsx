@@ -8,6 +8,7 @@ import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/product
 import { sendEventOnClick } from "deco-sites/fashion/sdk/analytics.ts";
 import type { Product } from "deco-sites/std/commerce/types.ts";
 import Quickview from "deco-sites/yamamay/islands/Quickview.tsx";
+import SkuSelectorAddToCartButton from "deco-sites/yamamay/islands/SkuSelectorAddToCartButton.tsx";
 
 interface Props {
   product: Product;
@@ -29,9 +30,9 @@ function ProductCard({ product, preload, itemListName }: Props) {
   } = product;
   const { productGroupID, name } = isVariantOf ?? {};
   const [front, back] = images ?? [];
-  const { listPrice, price } = useOffer(offers);
+  const { listPrice, price, seller } = useOffer(offers);
   const possibilities = useVariantPossibilities(product);
-  console.log({ possibilities });
+  // console.log({ possibilities });
   const options = Object.entries(
     possibilities["Color"] ?? possibilities["Tamanho"] ?? {},
   );
@@ -106,7 +107,19 @@ function ProductCard({ product, preload, itemListName }: Props) {
               </span>
             )}
         </div>
-        <figcaption class="card-actions w-full">
+        {seller && (
+          <SkuSelectorAddToCartButton
+            product={product}
+            skuId={productID}
+            sellerId={seller}
+            price={price ?? 0}
+            discount={price && listPrice ? listPrice - price : 0}
+            name={product.name ?? ""}
+            productGroupId={product.isVariantOf?.productGroupID ?? ""}
+          />
+        )}
+        {
+          /* <figcaption class="card-actions w-full">
           <ul class="flex items-center gap-2 w-full">
             {options.map(([value, [link]]) => (
               <a href={link}>
@@ -117,7 +130,8 @@ function ProductCard({ product, preload, itemListName }: Props) {
               </a>
             ))}
           </ul>
-        </figcaption>
+        </figcaption> */
+        }
       </div>
     </div>
   );

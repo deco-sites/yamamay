@@ -13,12 +13,18 @@ import ScrollTrackJS from "../../islands/ScrollTrackJS.tsx";
 export interface NavItem {
   label: string;
   href: string;
+  highlight?: boolean;
   children?: Array<{
     label: string;
     href: string;
+    highlight?: boolean;
     children?: Array<{
       label: string;
       href: string;
+      image?: {
+        src?: Image;
+        alt?: string;
+      };
     }>;
   }>;
   image?: {
@@ -66,8 +72,8 @@ function Header(
 
   return (
     <>
-      <header style={{ height: headerHeight }}>
-        <div id={id} class="bg-base-100 fixed w-full z-50 group">
+      <header style={{ height: headerHeight }} class="lg:min-h-[200px]">
+        <div id={id} class="bg-base-100 fixed w-screen z-50 group">
           <Alert alerts={alerts} />
           <Navbar items={navItems} logo={logo} searchbar={searchbar} />
           <ScrollTrackJS rootId={id} />

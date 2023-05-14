@@ -33,8 +33,11 @@ function FilterValues({ key, values }: FilterToggle) {
 
         return (
           <a href={url} class="flex items-center gap-2">
-            <div aria-checked={selected} class="checkbox" />
-            <span class="text-sm">{label}</span>
+            <div
+              aria-checked={selected}
+              class="checkbox rounded-none h-7 w-7"
+            />
+            <span class="text-base">{label}</span>
             <span class="text-sm text-base-300">({quantity})</span>
           </a>
         );
@@ -45,7 +48,7 @@ function FilterValues({ key, values }: FilterToggle) {
 
 function Filters({ filters }: Props) {
   return (
-    <ul class="flex flex-col gap-6 p-4">
+    <ul class="flex flex-col lg:flex-row gap-6 p-4">
       {filters
         .filter(isToggle)
         .map((filter) => (

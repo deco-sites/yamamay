@@ -54,12 +54,12 @@ export interface Props {
 
 const MOBILE_COLUMNS = {
   1: "grid-cols-1",
-  2: "grid-cols-2",
+  2: "w-1/2 px-[4.5px]",
 };
 
 const DESKTOP_COLUMNS = {
   1: "sm:grid-cols-1",
-  2: "sm:grid-cols-2",
+  2: "sm:w-1/2 px-[4.5px]",
   3: "sm:w-[33.333%] px-[4.5px]",
   4: "sm:w-[25%] px-[4.5px]",
   6: "sm:grid-cols-6",
@@ -97,11 +97,11 @@ export default function BannnerGrid({
   const id = useId();
 
   return (
-    <section class="container w-full px-4 md:px-0 mx-auto">
+    <section class="container w-full mx-auto">
       {title &&
         (
           <div class="py-6 md:py-0 md:pb-[40px] flex items-center justify-center mt-6">
-            <h2 class="text-4xl font-semibold uppercase max-w-[580px] text-center">
+            <h2 class="text-2xl lg:text-4xl font-semibold uppercase max-w-[580px] text-center">
               {title}
             </h2>
           </div>
@@ -113,14 +113,14 @@ export default function BannnerGrid({
         } ${DESKTOP_COLUMNS[itemsPerLine.desktop ?? 4]}`}
       > */
       }
-      <div id={id} class="px-14 relative">
-        <Slider class="carousel carousel-center w-full col-span-full row-span-full">
+      <div id={id} class="lg:px-14 relative">
+        <Slider class="carousel carousel-start lg:carousel-center  w-full col-span-full row-span-full">
           {banners.map(({ href, srcMobile, srcDesktop, alt, title }, index) => (
             <Slider.Item
               index={index}
               class={`carousel-item ${
                 DESKTOP_COLUMNS[itemsPerLine.desktop ?? 3]
-              }`}
+              } ${MOBILE_COLUMNS[itemsPerLine.mobile ?? 2]}`}
             >
               <a
                 href={href}
@@ -132,8 +132,8 @@ export default function BannnerGrid({
                   <Source
                     media="(max-width: 767px)"
                     src={srcMobile}
-                    width={100}
-                    height={100}
+                    width={391}
+                    height={412}
                   />
                   <Source
                     media="(min-width: 768px)"
@@ -161,22 +161,22 @@ export default function BannnerGrid({
         </Slider>
 
         <div class="flex items-center justify-center z-10 absolute top-1/2 -translate-y-1/2 left-0">
-          <Slider.PrevButton class="btn btn-circle border-transparent bg-white">
+          <Slider.PrevButton class="btn rounded-none text-black border-transparent bg-[hsla(0,0%,100%,.9)] lg:bg-transparent disabled:lg:bg-transparent lg:hover:bg-transparent lg:hover:border-transparent">
             <Icon
               class=""
               size={30}
               id="ChevronLeft"
-              strokeWidth={3}
+              strokeWidth={1}
             />
           </Slider.PrevButton>
         </div>
         <div class="flex items-center justify-center z-10 absolute top-1/2 -translate-y-1/2 right-0">
-          <Slider.NextButton class="btn btn-circle border-transparent bg-white">
+          <Slider.NextButton class="btn rounded-none text-black border-transparent bg-[hsla(0,0%,100%,.9)] lg:bg-transparent disabled:lg:bg-transparent lg:hover:bg-transparent lg:hover:border-transparent">
             <Icon
               class=""
               size={30}
               id="ChevronRight"
-              strokeWidth={3}
+              strokeWidth={1}
             />
           </Slider.NextButton>
         </div>

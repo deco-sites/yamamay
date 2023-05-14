@@ -45,7 +45,7 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
     <a
       href={href ?? "#"}
       aria-label={label}
-      class="relative h-auto overflow-y-hidden w-1/2"
+      class="relative h-auto overflow-y-hidden w-full lg:w-1/2"
     >
       <Picture preload={lcp}>
         <Source
@@ -81,12 +81,12 @@ function BannerFull(
   return (
     <div
       id={id}
-      class="flex group/banner bg-[#fff7f7] my-5"
+      class="flex flex-col-reverse relative lg:flex-row group/banner bg-[#fff7f7] my-5"
     >
-      <div class="w-1/2 flex justify-end items-center">
+      <div class="w-full lg:w-1/2 absolute bottom-0 z-10 bg-[rgba(255,247,247,.4)] lg:static flex justify-end items-center">
         <div class="flex flex-col item-center justify-center px-12 max-w-[560px]">
           <div class="flex justify-center">
-            <h2 class="text-5xl font-bold text-center uppercase max-w-[300px] inline-flex text-black">
+            <h2 class="text-2xl lg:text-5xl font-bold text-center uppercase max-w-[300px] inline-flex text-black lg:leading-[67px]">
               {title}
             </h2>
           </div>

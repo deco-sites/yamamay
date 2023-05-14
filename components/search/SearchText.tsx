@@ -31,20 +31,25 @@ function SearchText({ page, texts = [] }: Props) {
   }
 
   return (
-    <div class="bg-gray-100">
-      <div class="py-0 sm:py-10">
+    <div class="container">
+      <div class="mt-2 py-2 lg:py-0">
         {/* Description*/}
         <div class="relative">
-          <input type="checkbox" name="seemore" id="seemore" class="peer" />
+          <input
+            type="checkbox"
+            name="seemore"
+            id="seemore"
+            class="peer hidden"
+          />
           <div
-            class={`pt-4 sm:pt-6 overflow-hidden transition-all
-              max-h-[200px] peer-checked:max-h-fit
+            class={`overflow-hidden transition-all
+              max-h-[50px] peer-checked:max-h-fit peer-checked:pb-5 text-center
             `}
             id="description"
           >
             <div>
               <span
-                class="text-[14px] leading-[25px] whitespace-break-spaces"
+                class="text-[14px] leading-[25px] whitespace-break-spaces "
                 dangerouslySetInnerHTML={{ __html: matching.text }}
               >
               </span>
@@ -52,14 +57,12 @@ function SearchText({ page, texts = [] }: Props) {
           </div>
           <div
             class={`absolute bottom-0 right-0 left-0 
-             bg-[linear-gradient(transparent,#fff)] peer-checked:bg-transparent
-            flex justify-center itens-end h-[100px] [& span.seemore]:hidden peer-checked:[& span.seemore]:flex`}
+             bg-[linear-gradient(transparent,#fff)] peer-checked:bg-[linear-gradient(transparent,transparent)]
+            flex justify-center itens-end h-[100px] [&_span.seeless]:hidden peer-checked:[&_span.seeless]:flex [&_span.seemore]:flex peer-checked:[&_span.seemore]:hidden max-h-5 pt-2`}
           >
-            <label htmlFor="seemore">
-              <button class="bg-base-200 p-2 leading-none text-primary h-min">
-                <span class="seemore">See More</span>
-                <span class="seeless">See Less</span>
-              </button>
+            <label htmlFor="seemore" class="p-4 uppercase text-xs">
+              <span class="seemore">Show More</span>
+              <span class="seeless">Show Less</span>
             </label>
           </div>
         </div>
