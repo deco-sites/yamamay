@@ -33,8 +33,8 @@ const sectionStyles = {
 };
 
 const containerStyles = {
-  "sidebar-right": "h-full w-full sm:max-w-lg",
-  "sidebar-left": "h-full w-full sm:max-w-lg",
+  "sidebar-right": "h-full w-full max-w-[80%] sm:max-w-lg",
+  "sidebar-left": "h-full w-full max-w-[80%]  sm:max-w-lg",
   center: "",
 };
 
@@ -69,7 +69,7 @@ const Modal = ({
     <dialog
       {...props}
       ref={ref}
-      class={`bg-transparent p-0 m-0 max-w-[80%]  w-full max-h-full h-full backdrop-opacity-50 ${
+      class={`bg-transparent p-0 m-0 max-w-full  w-full max-h-full h-full backdrop-opacity-50 overflow-hidden ${
         dialogStyles[mode]
       } ${props.class ?? ""}`}
       onClick={(e) =>
@@ -85,17 +85,20 @@ const Modal = ({
             containerStyles[mode]
           }`}
         >
-          <header class="flex flex-col px-6 py-3 justify-between items-start">
-            <Button
-              class="btn btn-ghost min-h-[25px] h-[25px]"
-              onClick={onClose}
-            >
-              <Icon id="XMark" width={30} height={30} strokeWidth={2} />
-            </Button>
-            <h1>
-              <span class="font-medium text-2xl">{title}</span>
-            </h1>
-          </header>
+          {title &&
+            (
+              <header class="flex flex-col px-6 py-3 justify-between items-start">
+                <Button
+                  class="btn btn-ghost min-h-[25px] h-[25px]"
+                  onClick={onClose}
+                >
+                  <Icon id="XMark" width={30} height={30} strokeWidth={2} />
+                </Button>
+                <h1>
+                  <span class="font-medium text-2xl">{title}</span>
+                </h1>
+              </header>
+            )}
           <div class="overflow-y-auto flex-grow flex flex-col">
             {loading === "lazy" ? lazy.value && children : children}
           </div>

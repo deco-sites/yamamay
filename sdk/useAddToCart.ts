@@ -44,7 +44,7 @@ export const useAddToCart = (
     try {
       isAddingToCart.value = true;
       await addItems({
-        orderItems: [{ id: skuId, seller: sellerId, quantity: 1 }],
+        orderItems: [{ id: skuId, seller: sellerId, quantity }],
       });
 
       window.DECO_SITES_STD.sendAnalyticsEvent({

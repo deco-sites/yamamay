@@ -13,7 +13,7 @@ export interface Props {
 
 function ProductGallery({ products }: Props) {
   return (
-    <div class="grid grid-cols-2 gap-2 items-stretch sm:grid-cols-4 sm:gap-10">
+    <div class="grid grid-cols-2 gap-2 items-stretch sm:grid-cols-4 sm:gap-4">
       {products?.map((product, index) => (
         <ProductCardSearch product={product} preload={index === 0} />
       ))}

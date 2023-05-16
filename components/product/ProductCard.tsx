@@ -85,7 +85,7 @@ function ProductCard({ product, preload, itemListName }: Props) {
           /> */
           }
           <div class="absolute bottom-0 left-0">
-            <Quickview />
+            <Quickview product={product} />
           </div>
         </a>
       </figure>

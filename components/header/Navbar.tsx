@@ -116,7 +116,9 @@ function Navbar({ items, searchbar, logo }: {
         </div>
         <div class="bg-white">
           <div class="flex-auto flex justify-center max-w-[1190px] mx-auto relative">
-            {items.map((item, index) => <NavItem item={item} open={index == 0} />)}
+            {items.map((item, index) => (
+              <NavItem item={item} open={index == 0} />
+            ))}
           </div>
         </div>
       </div>

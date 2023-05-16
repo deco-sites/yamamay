@@ -85,7 +85,7 @@ function ProductCard({ product, preload, itemListName }: Props) {
           /> */
           }
           <div class="absolute bottom-0 left-0">
-            <Quickview />
+            <Quickview product={product} />
           </div>
         </a>
       </figure>
@@ -107,20 +107,19 @@ function ProductCard({ product, preload, itemListName }: Props) {
               </span>
             )}
         </div>
-        
-           <figcaption class="card-actions w-full">
+
+        <figcaption class="card-actions w-full">
           <ul class="flex items-center gap-2 w-full">
-            {options.map(([value, [link]]) => (
-              <a href={link}>
+            {options.map(([value, [{ url: skuUrl }]]) => (
+              <a href={skuUrl}>
                 <Avatar
-                  variant={link === url ? "active" : "default"}
+                  variant={skuUrl === url ? "active" : "default"}
                   content={value}
                 />
               </a>
             ))}
           </ul>
-        </figcaption> 
-        
+        </figcaption>
       </div>
     </div>
   );
