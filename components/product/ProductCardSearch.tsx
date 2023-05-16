@@ -107,31 +107,19 @@ function ProductCard({ product, preload, itemListName }: Props) {
               </span>
             )}
         </div>
-        {seller && (
-          <SkuSelectorAddToCartButton
-            product={product}
-            skuId={productID}
-            sellerId={seller}
-            price={price ?? 0}
-            discount={price && listPrice ? listPrice - price : 0}
-            name={product.name ?? ""}
-            productGroupId={product.isVariantOf?.productGroupID ?? ""}
-          />
-        )}
-        {
-          /* <figcaption class="card-actions w-full">
+
+        <figcaption class="card-actions w-full">
           <ul class="flex items-center gap-2 w-full">
-            {options.map(([value, [link]]) => (
-              <a href={link}>
+            {options.map(([value, [{ url: skuUrl }]]) => (
+              <a href={skuUrl}>
                 <Avatar
-                  variant={link === url ? "active" : "default"}
+                  variant={skuUrl === url ? "active" : "default"}
                   content={value}
                 />
               </a>
             ))}
           </ul>
-        </figcaption> */
-        }
+        </figcaption>
       </div>
     </div>
   );

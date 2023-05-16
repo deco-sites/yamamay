@@ -27,13 +27,13 @@ function Modals({ menu, searchbar }: Props) {
   return (
     <>
       <Modal
-        title="Menu"
         mode="sidebar-left"
         loading="lazy"
         open={displayMenu.value}
         onClose={() => {
           displayMenu.value = false;
         }}
+        class='top-[110px]'
       >
         <Suspense fallback={<Loading />}>
           <Menu {...menu} />

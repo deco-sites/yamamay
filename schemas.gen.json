@@ -9137,10 +9137,6 @@
           "type": "string",
           "title": "Title"
         },
-        "products": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[][]|null",
-          "title": "Products"
-        },
         "itemsPerPage": {
           "type": [
             "number",
@@ -9158,7 +9154,6 @@
       },
       "required": [
         "title",
-        "products",
         "shelfTitles"
       ],
       "title": "deco-sites/yamamay/components/product/ProductTabbedShelf.tsx@Props"

@@ -9,7 +9,7 @@ export interface INavItem {
   image?: { src?: string; alt?: string };
 }
 
-function NavItem({ item }: { item: INavItem }) {
+function NavItem({ item, open }: { item: INavItem; open: boolean }) {
   const { href, label, children, image, highlight } = item;
 
   return (
@@ -27,7 +27,9 @@ function NavItem({ item }: { item: INavItem }) {
       {children && children.length > 0 &&
         (
           <div
-            class="absolute flex group-hover:z-10 bg-base-100 z-50 items-start justify-center gap-6 border-t border-b-2 border-base-200 w-screen translate-x-[-50%]"
+            class={`absolute flex group-hover:z-10 bg-base-100 z-50 items-start justify-center gap-6 border-t border-b-2 border-base-200 w-screen translate-x-[-50%] ${
+              open ? "visible" : "invisible"
+            } group-hover/navitem:visible`}
             style={{ top: "100%", left: "50%" }}
           >
             <ul class="flex items-start justify-center gap-6 relative">

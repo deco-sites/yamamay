@@ -72,7 +72,7 @@ function Result({
               <Icon id="ChevronLeft" width={20} height={20} strokeWidth={2} />
             </a>
             <span class="btn btn-ghost">
-              Page {pageInfo.currentPage + 1}
+              Page {pageInfo.currentPage}
             </span>
             <a
               aria-label="next page link"
