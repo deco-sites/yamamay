@@ -1,6 +1,6 @@
 // Daisi UI theme
 export const theme = {
-  "primary": "hsl(180 100% 10%)",
+  "primary": "#ca0538",
   "secondary": "hsl(0 39% 39%)",
   "accent": "hsl(150 100% 50%)",
   "neutral": "hsl(0 0% 20%)",
@@ -28,6 +28,16 @@ export default {
     // https://tailwindcss.com/docs/container#centering-by-default
     container: {
       center: true,
+      screens: {
+        sm: "600px",
+        md: "728px",
+        lg: "984px",
+        xl: "1190px",
+        "2xl": "1190px",
+      },
+    },
+    fontFamily: {
+      "sans": "",
     },
     extend: {
       animation: {

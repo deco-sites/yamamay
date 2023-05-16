@@ -74,7 +74,8 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
           alt={alt}
         />
       </Picture>
-      {action && (
+      {
+        /* {action && (
         <div class="absolute top-0 bottom-0 m-auto left-0 right-0 sm:right-auto sm:left-[12%] max-h-min max-w-[235px] flex flex-col gap-4 p-4 rounded glass">
           <span class="text-6xl font-medium text-base-100">
             {action.title}
@@ -84,7 +85,8 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
           </span>
           <Button class="glass">{action.label}</Button>
         </div>
-      )}
+      )} */
+      }
     </a>
   );
 }
@@ -92,7 +94,8 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
 function Dots({ images, interval = 0 }: Props) {
   return (
     <>
-      <style
+      {
+        /* <style
         dangerouslySetInnerHTML={{
           __html: `
           @property --dot-progress {
@@ -103,15 +106,14 @@ function Dots({ images, interval = 0 }: Props) {
           `,
         }}
       >
-      </style>
-      <ul class="carousel justify-center col-span-full gap-4 z-10 row-start-4">
+      </style> */
+      }
+      <ul class="carousel justify-center col-span-full z-10 row-start-4">
         {images?.map((_, index) => (
           <li class="carousel-item">
             <Slider.Dot index={index}>
               <div class="py-5">
-                <div
-                  class="w-16 sm:w-20 h-0.5 rounded group-disabled:animate-progress bg-gradient-to-r from-base-100 from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
-                  style={{ animationDuration: `${interval}s` }}
+                <div class="w-16 sm:w-36 h-[5px] rounded-none bg-base-100 opacity-50 group-disabled:opacity-100 group-disabled:bg-primary" // style={{ animationDuration: `${interval}s` }}
                 />
               </div>
             </Slider.Dot>
@@ -125,20 +127,20 @@ function Dots({ images, interval = 0 }: Props) {
 function Buttons() {
   return (
     <>
-      <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
-        <Slider.PrevButton class="btn btn-circle glass">
+      <div class="hidden lg:flex items-center justify-center z-10 col-start-1 row-start-2">
+        <Slider.PrevButton class="btn btn-circle border-transparent bg-white opacity-0 text-black hover:border-white hover:bg-white group-hover/banner:opacity-100">
           <Icon
-            class="text-base-100"
+            class=""
             size={20}
             id="ChevronLeft"
             strokeWidth={3}
           />
         </Slider.PrevButton>
       </div>
-      <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
-        <Slider.NextButton class="btn btn-circle glass">
+      <div class="hidden lg:flex items-center justify-center z-10 col-start-3 row-start-2">
+        <Slider.NextButton class="btn btn-circle border-transparent bg-white opacity-0 text-black hover:border-white hover:bg-white group-hover/banner:opacity-100">
           <Icon
-            class="text-base-100"
+            class=""
             size={20}
             id="ChevronRight"
             strokeWidth={3}
@@ -155,7 +157,7 @@ function BannerCarousel({ images, preload, interval }: Props) {
   return (
     <div
       id={id}
-      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px]"
+      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] group/banner overflow-x-hidden"
     >
       <Slider class="carousel carousel-center w-screen col-span-full row-span-full scrollbar-none gap-6">
         {images?.map((image, index) => (
@@ -169,7 +171,7 @@ function BannerCarousel({ images, preload, interval }: Props) {
 
       <Dots images={images} interval={interval} />
 
-      <SliderJS rootId={id} interval={interval && interval * 1e3} infinite />
+      <SliderJS rootId={id} infinite />
     </div>
   );
 }

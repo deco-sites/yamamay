@@ -28,36 +28,37 @@ function ProductShelf({
   return (
     <div
       id={id}
-      class="container grid grid-cols-[48px_1fr_48px] grid-rows-[48px_1fr_48px_1fr] py-10 px-0 sm:px-5"
+      class="container flex flex-col pb-10 pt-3 px-0 gap-2"
     >
       <h2 class="text-center row-start-1 col-span-full">
-        <span class="font-medium text-2xl">{title}</span>
+        <span class="font-bold text-4xl">{title}</span>
       </h2>
+      <div class="relative">
+        <Slider class="carousel carousel-center sm:carousel-end">
+          {products?.map((product, index) => (
+            <Slider.Item
+              index={index}
+              class="carousel-item max-w-[70%] w-[70%] sm:max-w-[25%] sm:w-[25%] px-1  sm:px-3 box-border"
+            >
+              <ProductCard product={product} itemListName={title} />
+            </Slider.Item>
+          ))}
+        </Slider>
 
-      <Slider class="carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5">
-        {products?.map((product, index) => (
-          <Slider.Item
-            index={index}
-            class="carousel-item w-[270px] sm:w-[292px] first:ml-6 sm:first:ml-0 last:mr-6 sm:last:mr-0"
-          >
-            <ProductCard product={product} itemListName={title} />
-          </Slider.Item>
-        ))}
-      </Slider>
-
-      <>
-        <div class="hidden relative sm:block z-10 col-start-1 row-start-3">
-          <Slider.PrevButton class="btn btn-circle btn-outline absolute right-1/2 bg-base-100">
-            <Icon size={20} id="ChevronLeft" strokeWidth={3} />
-          </Slider.PrevButton>
-        </div>
-        <div class="hidden relative sm:block z-10 col-start-3 row-start-3">
-          <Slider.NextButton class="btn btn-circle btn-outline absolute left-1/2 bg-base-100">
-            <Icon size={20} id="ChevronRight" strokeWidth={3} />
-          </Slider.NextButton>
-        </div>
-      </>
-      <SliderJS rootId={id} />
+        <>
+          <div class="hidden absolute top-1/2 left-0 -translate-y-1/2 sm:block z-10 ">
+            <Slider.PrevButton class="px-3">
+              <Icon size={30} id="ChevronLeft" strokeWidth={1} />
+            </Slider.PrevButton>
+          </div>
+          <div class="hidden absolute top-1/2 right-0 -translate-y-1/2 sm:block z-10">
+            <Slider.NextButton class="px-3">
+              <Icon size={30} id="ChevronRight" strokeWidth={1} />
+            </Slider.NextButton>
+          </div>
+        </>
+        <SliderJS rootId={id} infinite />
+      </div>
       <SendEventOnLoad
         event={{
           name: "view_item_list",

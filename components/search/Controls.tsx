@@ -3,7 +3,6 @@ import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import Filters from "deco-sites/fashion/components/search/Filters.tsx";
 import Sort from "deco-sites/fashion/components/search/Sort.tsx";
 import Modal from "deco-sites/fashion/components/ui/Modal.tsx";
-import Breadcrumb from "deco-sites/fashion/components/ui/Breadcrumb.tsx";
 import { useSignal } from "@preact/signals";
 import type { ProductListingPage } from "deco-sites/std/commerce/types.ts";
 
@@ -17,30 +16,57 @@ function SearchControls(
   { filters, breadcrumb, displayFilter, sortOptions }: Props,
 ) {
   const open = useSignal(false);
+  const filterOpen = useSignal(false);
 
   return (
-    <div class="flex flex-col justify-between mb-4 p-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[53px] sm:border-b sm:border-base-200">
-      <div class="flex flex-row items-center sm:p-0 mb-2">
-        <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
-      </div>
-
-      <div class="flex flex-row items-center justify-between border-b border-base-200 sm:gap-4 sm:border-none">
+    <div class="flex flex-col justify-between mb-4 p-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[53px]">
+      <div class="flex flex-row items-center justify-between border-b border-base-200  sm:border-none divide-x">
         <Button
           class={displayFilter ? "btn-ghost" : "btn-ghost sm:hidden"}
           onClick={() => {
             open.value = true;
           }}
         >
-          Filtrar
-          <Icon id="FilterList" width={16} height={16} />
+          Filter
+          <Icon
+            id="ChevronDown"
+            size={20}
+            strokeWidth={1}
+          />
         </Button>
+        {filters.length > 0 && (
+          <div class="hidden sm:block w-min">
+            <button
+              onClick={() => {
+                filterOpen.value = !filterOpen.value;
+              }}
+              class="whitespace-nowrap flex pr-7"
+            >
+              Filter by
+              <Icon
+                id="ChevronDown"
+                size={20}
+                strokeWidth={1}
+              />
+            </button>
+            <div
+              class={`absolute w-screen bg-white py-6 z-30 left-0 shadow-md ${
+                filterOpen.value ? "visible" : "invisible"
+              }`}
+            >
+              <div class="container">
+                <Filters filters={filters} />
+              </div>
+            </div>
+          </div>
+        )}
         {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
       </div>
 
       <Modal
         loading="lazy"
-        title="Filtrar"
-        mode="sidebar-right"
+        title="Filtra"
+        mode="center"
         open={open.value}
         onClose={() => {
           open.value = false;

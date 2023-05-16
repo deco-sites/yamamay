@@ -16,7 +16,7 @@ if (IS_BROWSER && typeof window.HTMLDialogElement === "undefined") {
 export type Props = JSX.IntrinsicElements["dialog"] & {
   title?: string;
   mode?: "sidebar-right" | "sidebar-left" | "center";
-  onClose?: () => Promise<void> | void;
+  onClose?: (e?: any) => Promise<void> | void;
   loading?: "lazy" | "eager";
 };
 
@@ -85,13 +85,16 @@ const Modal = ({
             containerStyles[mode]
           }`}
         >
-          <header class="flex px-4 py-6 justify-between items-center border-b border-base-200">
+          <header class="flex flex-col px-6 py-3 justify-between items-start">
+            <Button
+              class="btn btn-ghost min-h-[25px] h-[25px]"
+              onClick={onClose}
+            >
+              <Icon id="XMark" width={30} height={30} strokeWidth={2} />
+            </Button>
             <h1>
               <span class="font-medium text-2xl">{title}</span>
             </h1>
-            <Button class="btn btn-ghost" onClick={onClose}>
-              <Icon id="XMark" width={20} height={20} strokeWidth={2} />
-            </Button>
           </header>
           <div class="overflow-y-auto flex-grow flex flex-col">
             {loading === "lazy" ? lazy.value && children : children}

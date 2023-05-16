@@ -1,6 +1,6 @@
 import { useSignal } from "@preact/signals";
 import { useCallback } from "preact/hooks";
-import { useCart } from "deco-sites/std/commerce/vtex/hooks/useCart.ts";
+import { useCart } from "deco-sites/std/packs/vtex/hooks/useCart.ts";
 import { useUI } from "deco-sites/fashion/sdk/useUI.ts";
 import { AnalyticsEvent } from "deco-sites/std/commerce/types.ts";
 
@@ -22,10 +22,12 @@ export interface Options {
    */
   name: string;
   productGroupId: string;
+  quantity?: number;
 }
 
 export const useAddToCart = (
-  { skuId, sellerId, price, discount, name, productGroupId }: Options,
+  { skuId, sellerId, price, discount, name, productGroupId, quantity = 1 }:
+    Options,
 ) => {
   const isAddingToCart = useSignal(false);
   const { displayCart } = useUI();
@@ -50,7 +52,7 @@ export const useAddToCart = (
         params: {
           items: [{
             item_id: productGroupId,
-            quantity: 1,
+            quantity,
             price,
             discount,
             item_name: name,
