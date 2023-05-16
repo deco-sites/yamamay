@@ -1,101 +1,77 @@
-// import type { LoaderFunction } from "$live/types.ts";
+import { withISFallback } from "deco-sites/std/commerce/vtex/withISFallback.ts";
+import loader from "./multipleList.ts";
+import type { LoaderFunction } from "$live/types.ts";
+import type { StateVTEX } from "deco-sites/std/packs/vtex/types.ts";
+import type { Product } from "deco-sites/std/commerce/types.ts";
 
-// import { withISFallback } from "deco-sites/std/packs/vtex/withISFallback.ts";
-// import loader from "deco-sites/std/packs/vtex/loaders/intelligentSearch/productList.ts";
+export interface UnitProp {
+  /** @description query to use on search */
+  query: string;
+  /** @description total number of items to display */
+  count: number;
+  //* @enumNames ["relevance", "greater discount", "arrivals", "name asc", "name desc", "most ordered", "price asc", "price desc"]
+  /**
+   * @description search sort parameter
+   */
+  sort?:
+    | ""
+    | "price:desc"
+    | "price:asc"
+    | "orders:desc"
+    | "name:desc"
+    | "name:asc"
+    | "release:desc"
+    | "discount:desc";
 
-// import { toProduct } from "deco-sites/std/packs/vtex/transform.ts";
-// import { createClient } from "deco-sites/std/packs/vtex/client.ts";
-// import type { StateVTEX } from "deco-sites/std/packs/vtex/types.ts";
-// import type { Product } from "deco-sites/std/commerce/types.ts";
-// import type { SearchArgs, Sort } from "deco-sites/std/packs/vtex/types.ts";
+  // TODO: pattern property isn't being handled by RJSF
+  /**
+   * @title Collection ID
+   * @pattern \d*
+   */
+  collection?: string[];
+}
 
-// export interface QueryProps {
-//   /** @description query to use on search */
-//   query: string;
-//   /** @description total number of items to display */
-//   count: number;
-//   //* @enumNames ["relevance", "greater discount", "arrivals", "name asc", "name desc", "most ordered", "price asc", "price desc"]
-//   /**
-//    * @description search sort parameter
-//    */
-//   sort?:
-//     | ""
-//     | "price:desc"
-//     | "price:asc"
-//     | "orders:desc"
-//     | "name:desc"
-//     | "name:asc"
-//     | "release:desc"
-//     | "discount:desc";
+interface Props {
+  queries: Array<UnitProp>;
+}
 
-//   // TODO: pattern property isn't being handled by RJSF
-//   /**
-//    * @description Collection ID or (Product Cluster id). For more info: https://developers.vtex.com/docs/api-reference/search-api#get-/api/catalog_system/pub/products/search .
-//    * @pattern \d*
-//    */
-//   collection?: string[];
-// }
-// export interface Props {
-//   queries: Array<QueryProps>;
-// }
+/**
+ * @title VTEX product list - Intelligent Search (deprecated)
+ * @description Usefull for shelves and static galleries.
+ * @deprecated true
+ */
+const loaderV0: LoaderFunction<
+  Props,
+  Product[][] | null,
+  StateVTEX
+> = withISFallback(async (
+  req,
+  ctx,
+  props,
+) => {
+  const productsList = [];
 
-// /**
-//  * @title Product list loader
-//  * @description Usefull for shelves and static galleries.
-//  */
-// const multipleProductListLoader: LoaderFunction<
-//   Props,
-//   Product[][] | null,
-//   StateVTEX
-// > = withISFallback(async (
-//   req,
-//   ctx,
-//   props,
-// ) => {
-//   const { global: { configVTEX }, segment } = ctx.state;
-//   const url = new URL(req.url);
-//   const vtex = createClient(configVTEX);
+  console.log(props);
 
-//   const productsList = [];
+  if (!props.queries.length) return { data: null, status: 404 };
 
-//   for (const prop of props.queries) {
-//     const count = prop.count ?? 12;
-//     const query = prop.query || "";
-//     const sort: Sort = prop.sort || "";
-//     const selectedFacets: SearchArgs["selectedFacets"] = [];
+  for (const prop of props.queries) {
+    const p = prop.query
+      ? { query: prop.query, count: prop.count }
+      : { collection: prop.collection?.[0], count: prop.count };
 
-//     if (prop.collection) {
-//       prop.collection.forEach((productClusterId) => {
-//         selectedFacets.push({
-//           key: "productClusterIds",
-//           value: productClusterId,
-//         });
-//       });
-//     }
+    const data = await loader(
+      p,
+      req,
+      ctx.state,
+    );
 
-//     // search products on VTEX. Feel free to change any of these parameters
-//     const { products: vtexProducts } = await loader({
-//       query,
-//       page: 0,
-//       count,
-//       sort,
-//       selectedFacets,
-//       segment,
-//     });
+    if (!data) return;
 
-//     // Transform VTEX product format into schema.org's compatible format
-//     // If a property is missing from the final `products` array you can add
-//     // it in here
-//     const products = vtexProducts.map((p) =>
-//       toProduct(p, p.items[0], 0, { url, priceCurrency: vtex.currency() })
-//     );
+    productsList.push(data);
+  }
 
-//     productsList.push(products);
-//   }
+  return { data: productsList, status: productsList.length > 0 ? 200 : 404 };
+});
 
-//   return {
-//     data: productsList,
-//   };
-// });
-
-// export default multipleProductListLoader;
+export default loaderV0;

@@ -5,6 +5,7 @@
 import config from "./deno.json" assert { type: "json" };
 import { DecoManifest } from "$live/types.ts";
 import * as $0 from "./functions/vtexLoadMultipleProductLists.ts";
+import * as $1 from "./functions/multipleList.ts";
 import * as $$$$0 from "./routes/_app.tsx";
 import * as $$$$1 from "./routes/api/[...catchall].tsx";
 import * as $$$$$0 from "./islands/SkuSelectorAddToCartButton.tsx";
@@ -176,6 +177,7 @@ const manifest = {
     "deco-sites/std/functions/vtexProductListingPage.ts": i2$24,
     "deco-sites/std/functions/vtexSuggestions.ts": i2$25,
     "deco-sites/std/functions/vtexWishlist.ts": i2$26,
+    "deco-sites/yamamay/functions/multipleList.ts": $1,
     "deco-sites/yamamay/functions/vtexLoadMultipleProductLists.ts": $0,
   },
   "routes": {

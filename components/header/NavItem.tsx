@@ -41,25 +41,33 @@ function NavItem({ item }: { item: INavItem }) {
                   >
                     <span>{node.label}</span>
                   </a>
-                  <div class="invisible bg-white w-screen left-1/2 -translate-x-1/2 absolute group-hover/submenu:visible">
-                    <ul class={`grid gap-1 mt-4 container ${node.children?.[0].image?.src ? "grid-cols-5" : 'grid-cols-[repeat(2,.2fr)]'} `}>
-                      {node.children?.map((leaf) => (
-                        <li>
-                          <a class="hover:underline" href={leaf.href}>
-                            <span class="text-sm">{leaf.label}</span>
-                            {leaf.image?.src && (
-                              <Image
-                                src={leaf.image?.src}
-                                alt={leaf.image?.alt}
-                                width={200}
-                                height={128}
-                              />
-                            )}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {node.children?.length >= 0 && (
+                    <div class="invisible bg-white w-screen left-1/2 -translate-x-1/2 absolute group-hover/submenu:visible">
+                      <ul
+                        class={`grid gap-1 my-4 container ${
+                          node.children?.[0].image?.src
+                            ? "grid-cols-5"
+                            : "grid-cols-[repeat(2,.2fr)]"
+                        } `}
+                      >
+                        {node.children?.map((leaf) => (
+                          <li>
+                            <a class="hover:underline" href={leaf.href}>
+                              <span class="text-sm">{leaf.label}</span>
+                              {leaf.image?.src && (
+                                <Image
+                                  src={leaf.image?.src}
+                                  alt={leaf.image?.alt}
+                                  width={200}
+                                  height={128}
+                                />
+                              )}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>

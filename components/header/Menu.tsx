@@ -5,23 +5,44 @@ export interface Props {
   items: INavItem[];
 }
 
-function MenuItem({ item, open }: { item: INavItem; open?: boolean }) {
+function MenuItem(
+  { item, open, noItem }: { item: INavItem; open?: boolean; noItem?: boolean },
+) {
   return (
-    <div class="collapse">
-      <input
-        type="checkbox"
-        class="peer"
-        checked={open}
-        onClick={() => console.log("teste")}
-      />
+    <div class={`${noItem ? "" : "collapse max-h-10px"}`}>
+      {!noItem && (
+        <>
+          <input
+            type="checkbox"
+            class="peer"
+            checked={open}
+            onClick={() => console.log("teste")}
+          />
+          {!!item?.children?.length
+            ? (
+              <div
+                class={`collapse-title peer-checked:bg-black peer-checked:text-white text-sm min-h-fit flex py-2 ${
+                  item.highlight ? "text-primary font-bold" : ""
+                } `}
+              >
+                {item.label}
+              </div>
+            )
+            : (
+              <a
+                href={item.href}
+                class={`collapse-title peer-checked:bg-black peer-checked:text-white text-sm min-h-fit flex py-2 ${
+                  item.highlight ? "text-primary font-bold" : ""
+                } `}
+              >
+                {item.label}
+              </a>
+            )}
+        </>
+      )}
       <div
-        class={`collapse-title peer-checked:bg-black peer-checked:text-white text-lg font-bold flex justify-center ${
-          item.highlight ? "text-primary" : ""
-        } `}
+        class={`${noItem ? "" : "collapse-content absolute"}`}
       >
-        {item.label}
-      </div>
-      <div class="collapse-content absolute translate-x-full">
         <ul>
           {item.children?.map((node) => (
             <li>
@@ -64,7 +85,7 @@ function Menu({ items }: Props) {
       <ul>
         {items.map((item, index) => (
           <li>
-            <MenuItem item={item} open={index == 0} />
+            <MenuItem item={item} open={index == 0} noItem={true} />
           </li>
         ))}
       </ul>
