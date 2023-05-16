@@ -27,7 +27,6 @@ function Modals({ menu, searchbar }: Props) {
   return (
     <>
       <Modal
-        title="Menu"
         mode="sidebar-left"
         loading="lazy"
         open={displayMenu.value}
