@@ -1,4 +1,4 @@
-import ProductCard from "deco-sites/fashion/components/product/ProductCard.tsx";
+import ProductCardHome from "deco-sites/fashion/components/product/ProductCardHome.tsx";
 import SliderJS from "deco-sites/fashion/islands/SliderJS.tsx";
 import Icon from "deco-sites/fashion/components/ui/Icon.tsx";
 import Slider from "deco-sites/fashion/components/ui/Slider.tsx";
@@ -6,12 +6,11 @@ import SendEventOnLoad from "deco-sites/fashion/components/SendEventOnLoad.tsx";
 import { useId } from "preact/hooks";
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
 import { useOffer } from "deco-sites/fashion/sdk/useOffer.ts";
-import type { LoaderReturnType } from "$live/types.ts";
 import type { Product } from "deco-sites/std/commerce/types.ts";
 
 export interface Props {
   title: string;
-  // products: LoaderReturnType<Product[][] | null>;
+  products: Product[][] | null;
   itemsPerPage?: number;
   shelfTitles: string[];
 }
@@ -29,31 +28,39 @@ function ProductShelf({
   return (
     <div
       id={id}
-      class="container grid grid-cols-[48px_1fr_48px] grid-rows-[48px_1fr_48px_1fr] py-10 px-0 sm:px-5"
+      class="relative grid grid-cols-[48px_1fr_48px] grid-rows-[1fr_48px_1fr] py-10 px-0 sm:px-5"
     >
-      <Slider class="carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5">
+      <Slider class="carousel carousel-center sm:carousel-end col-span-full row-start-1 row-end-5">
         {products?.map((product, index) => (
           <Slider.Item
             index={index}
-            class="carousel-item w-[270px] sm:w-[292px] first:ml-6 sm:first:ml-0 last:mr-6 sm:last:mr-0"
+            class="carousel-item max-w=[225px] w-[225px] sm:w-[225px] first:ml-6 sm:first:ml-0 last:mr-6 sm:last:mr-0 px-1"
           >
-            <ProductCard product={product} itemListName={title} />
+            <ProductCardHome product={product} itemListName={title} />
           </Slider.Item>
         ))}
       </Slider>
 
-      <>
-        <div class="hidden relative sm:block z-10 col-start-1 row-start-3">
-          <Slider.PrevButton class="btn btn-circle btn-outline absolute right-1/2 bg-base-100">
-            <Icon size={20} id="ChevronLeft" strokeWidth={3} />
-          </Slider.PrevButton>
-        </div>
-        <div class="hidden relative sm:block z-10 col-start-3 row-start-3">
-          <Slider.NextButton class="btn btn-circle btn-outline absolute left-1/2 bg-base-100">
-            <Icon size={20} id="ChevronRight" strokeWidth={3} />
-          </Slider.NextButton>
-        </div>
-      </>
+      <div class="flex items-center justify-center z-10 absolute top-1/2 -translate-y-1/2 left-0">
+        <Slider.PrevButton class="btn rounded-none text-black border-transparent bg-[hsla(0,0%,100%,.9)]  disabled:lg:opacity-50 lg:hover:bg-transparent lg:hover:border-transparent">
+          <Icon
+            class=""
+            size={30}
+            id="ChevronLeft"
+            strokeWidth={1}
+          />
+        </Slider.PrevButton>
+      </div>
+      <div class="flex items-center justify-center z-10 absolute top-1/2 -translate-y-1/2 right-0">
+        <Slider.NextButton class="btn rounded-none text-black border-transparent bg-[hsla(0,0%,100%,.9)] disabled:lg:opacity-50 lg:hover:bg-transparent lg:hover:border-transparent">
+          <Icon
+            class=""
+            size={30}
+            id="ChevronRight"
+            strokeWidth={1}
+          />
+        </Slider.NextButton>
+      </div>
       <SliderJS rootId={id} />
       <SendEventOnLoad
         event={{
@@ -83,7 +90,7 @@ function TabbedShelf({
   }
 
   return (
-    <div class="flex flex-col py-10 px-0 sm:px-5 gap-[32px]">
+    <div class="max-w-[1316px] mx-auto flex flex-col py-10 px-0 sm:px-5 gap-[32px]">
       <h2 class="text-center">
         <span class="uppercase">{title}</span>
       </h2>
@@ -100,15 +107,18 @@ function TabbedShelf({
             type="radio"
             id={`tab${index}`}
             name="css-tabs"
-            class="hidden"
+            class="hidden peer"
             checked={index === 0}
           />
         ))}
 
-        <ul class="flex w-full sm:justify-center overflow-x-auto">
+        <ul class="flex w-full sm:justify-center peer-[&:nth-of-type(1):checked]:[&_.tab:nth-of-type(1)]:text-black peer-[&:nth-of-type(2):checked]:[&_.tab:nth-of-type(2)]:text-black peer-[&:nth-of-type(1):checked]:[&_.tab:nth-of-type(1)]:border-black peer-[&:nth-of-type(2):checked]:[&_.tab:nth-of-type(2)]:border-black">
           {shelfTitles?.map((shelfTitle, index) => (
-            <li class="tab p-[10px] border-b-[4px] border-default">
-              <label for={`tab${index}`} class="px-[24px] whitespace-nowrap">
+            <li class="tab p-[10px] border-b border-default  h-fit ">
+              <label
+                for={`tab${index}`}
+                class="px-2 lg:px-[24px] text-base lg:text-xl whitespace-nowrap"
+              >
                 {shelfTitle}
               </label>
             </li>
@@ -116,7 +126,7 @@ function TabbedShelf({
         </ul>
 
         {products?.map((shelf, index) => (
-          <div class="">
+          <div class="hidden peer-[&:nth-of-type(1):checked]:[&:nth-of-type(1)]:flex peer-[&:nth-of-type(2):checked]:[&:nth-of-type(2)]:flex">
             <ProductShelf products={shelf} title={shelfTitles[index]} />
           </div>
         ))}

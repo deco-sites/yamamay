@@ -85,7 +85,7 @@ function SkuSelectorAddToCartButton(
                     <li>
                       <button
                         onClick={() => {
-                          console.log(id);
+                          // console.log(id);
                           selectedSku.value = id;
                         }}
                       >

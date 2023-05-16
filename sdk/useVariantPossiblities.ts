@@ -61,6 +61,6 @@ export const useVariantPossibilities = (
     >,
   );
 
-  console.log(possibilities);
+  // console.log(possibilities);
   return possibilities;
 };
