@@ -6,12 +6,11 @@ import SendEventOnLoad from "deco-sites/fashion/components/SendEventOnLoad.tsx";
 import { useId } from "preact/hooks";
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
 import { useOffer } from "deco-sites/fashion/sdk/useOffer.ts";
-import type { LoaderReturnType } from "$live/types.ts";
 import type { Product } from "deco-sites/std/commerce/types.ts";
 
 export interface Props {
   title: string;
-  // products: LoaderReturnType<Product[][] | null>;
+  products: Product[][] | null;
   itemsPerPage?: number;
   shelfTitles: string[];
 }

@@ -3420,6 +3420,11 @@
           "description": "Usefull for shelves and static galleries.",
           "deprecated": true,
           "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz@Props"
+            }
+          ],
           "required": [
             "__resolveType"
           ],
@@ -3434,6 +3439,89 @@
           }
         }
       ]
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz@UnitProp": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "query to use on search",
+          "title": "Query"
+        },
+        "count": {
+          "type": "number",
+          "description": "total number of items to display",
+          "title": "Count"
+        },
+        "sort": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": ""
+            },
+            {
+              "type": "string",
+              "const": "price:desc"
+            },
+            {
+              "type": "string",
+              "const": "price:asc"
+            },
+            {
+              "type": "string",
+              "const": "orders:desc"
+            },
+            {
+              "type": "string",
+              "const": "name:desc"
+            },
+            {
+              "type": "string",
+              "const": "name:asc"
+            },
+            {
+              "type": "string",
+              "const": "release:desc"
+            },
+            {
+              "type": "string",
+              "const": "discount:desc"
+            }
+          ],
+          "type": "string",
+          "description": "search sort parameter",
+          "title": "Sort"
+        },
+        "collection": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Collection",
+          "pattern": "\\d*"
+        }
+      },
+      "required": [
+        "query",
+        "count"
+      ],
+      "title": "UnitProp"
+    },
+    "ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz@Props": {
+      "type": "object",
+      "properties": {
+        "queries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz@UnitProp"
+          },
+          "title": "Queries"
+        }
+      },
+      "required": [
+        "queries"
+      ],
+      "title": "deco-sites/yamamay/functions/vtexLoadMultipleProductLists.ts@Props"
     },
     "ZGVjby1jeC9saXZlL2Jsb2Nrcy9hY2NvdW50LnRz@Account": {
       "type": "object",
@@ -9137,6 +9225,10 @@
           "type": "string",
           "title": "Title"
         },
+        "products": {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvY29tbWVyY2UvdHlwZXMudHM=@Product[][]|null",
+          "title": "Products"
+        },
         "itemsPerPage": {
           "type": [
             "number",
@@ -9154,6 +9246,7 @@
       },
       "required": [
         "title",
+        "products",
         "shelfTitles"
       ],
       "title": "deco-sites/yamamay/components/product/ProductTabbedShelf.tsx@Props"
@@ -10549,6 +10642,11 @@
       "description": "Usefull for shelves and static galleries.",
       "deprecated": true,
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ZGVjby1zaXRlcy95YW1hbWF5L2Z1bmN0aW9ucy92dGV4TG9hZE11bHRpcGxlUHJvZHVjdExpc3RzLnRz@Props"
+        }
+      ],
       "required": [
         "__resolveType"
       ],

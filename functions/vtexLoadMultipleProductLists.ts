@@ -31,7 +31,7 @@ export interface UnitProp {
   collection?: string[];
 }
 
-interface Props {
+export interface Props {
   queries: Array<UnitProp>;
 }
 
@@ -66,7 +66,7 @@ const loaderV0: LoaderFunction<
       ctx.state,
     );
 
-    if (!data) return;
+    if (!data) return { data: null };
 
     productsList.push(data);
   }
