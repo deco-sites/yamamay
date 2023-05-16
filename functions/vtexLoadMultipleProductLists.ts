@@ -51,8 +51,6 @@ const loaderV0: LoaderFunction<
 ) => {
   const productsList = [];
 
-  console.log(props);
-
   if (!props.queries.length) return { data: null, status: 404 };
 
   for (const prop of props.queries) {
