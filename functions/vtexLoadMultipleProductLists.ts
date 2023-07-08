@@ -1,5 +1,5 @@
 import { withISFallback } from "deco-sites/std/commerce/vtex/withISFallback.ts";
-import loader from "./multipleList.ts";
+import loader from "deco-sites/std/functions/vtexProductList.ts";
 import type { LoaderFunction } from "$live/types.ts";
 import type { StateVTEX } from "deco-sites/std/packs/vtex/types.ts";
 import type { Product } from "deco-sites/std/commerce/types.ts";

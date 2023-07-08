@@ -33,7 +33,7 @@ function Modals({ menu, searchbar }: Props) {
         onClose={() => {
           displayMenu.value = false;
         }}
-        class='top-[110px]'
+        class="top-[110px]"
       >
         <Suspense fallback={<Loading />}>
           <Menu {...menu} />
