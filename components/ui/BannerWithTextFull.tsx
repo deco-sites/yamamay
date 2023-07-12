@@ -30,6 +30,7 @@ export interface Props {
   subtitle: string;
   buttonLabel: string;
   href: string;
+  bannerPosition: "right" | "left";
 }
 
 function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {

@@ -30,6 +30,8 @@ export interface Props {
   subtitle: string;
   buttonLabel: string;
   href: string;
+  bannerPosition: "right" | "left";
+  full?: boolean;
 }
 
 function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
@@ -74,14 +76,27 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
 }
 
 function BannerFull(
-  { image, preload, title, subtitle, buttonLabel, href }: Props,
+  {
+    image,
+    preload,
+    title,
+    subtitle,
+    buttonLabel,
+    href,
+    bannerPosition = "left",
+    full,
+  }: Props,
 ) {
   const id = useId();
 
   return (
     <div
       id={id}
-      class="max-w-[1220px] mx-auto flex flex-col lg:flex-row group/banner my-5"
+      class={`${full ? "" : "max-w-[1220px] mx-auto"} flex ${
+        bannerPosition === "right"
+          ? "flex-col-reverse lg:flex-row-reverse"
+          : "flex-col lg:flex-row"
+      } group/banner my-5`}
     >
       <BannerItem image={image} lcp={preload} />
       <div class="w-full lg:w-1/2 flex justify-center items-center">

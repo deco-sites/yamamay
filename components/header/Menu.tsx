@@ -15,7 +15,8 @@ function SubMenuItem(
     <div>
       {!noItem && (
         <>
-          {!!item?.children?.length
+          // deno-lint-ignore no-extra-boolean-cast
+          {Boolean(item?.children?.length)
             ? (
               <div
                 class={`peer-checked:bg-black peer-checked:text-white uppercase text-center text-sm h-20px flex py-2 ${

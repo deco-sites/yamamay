@@ -4,6 +4,10 @@ import Slider from "deco-sites/fashion/components/ui/Slider.tsx";
 import SliderJS from "deco-sites/fashion/islands/SliderJS.tsx";
 import { useId } from "preact/hooks";
 import Icon from "./Icon.tsx";
+import PreactMarkdown from "preact-markdown";
+import remarkGfm from "remark-gfm";
+import type { HTML } from "deco-sites/std/components/types.ts";
+import RichText from "deco-sites/yamamay/components/ui/RichText.tsx";
 
 export interface Banner {
   srcMobile: LiveImage;
@@ -16,7 +20,7 @@ export interface Banner {
    * @description When you click you go to
    */
   href: string;
-  title: string;
+  title: HTML;
 }
 
 export type BorderRadius =
@@ -30,7 +34,7 @@ export type BorderRadius =
   | "full";
 
 export interface Props {
-  title?: string;
+  title?: HTML;
   /**
    * @description Default is 2 for mobile and all for desktop
    */
@@ -104,6 +108,7 @@ export default function BannnerGrid({
             <h2 class="text-2xl lg:text-4xl font-semibold uppercase max-w-[580px] text-center">
               {title}
             </h2>
+            <RichText text={title} />
           </div>
         )}
       {
@@ -154,6 +159,9 @@ export default function BannnerGrid({
                   <span class="uppercase text-lg font-bold underline">
                     {title}
                   </span>
+                  <PreactMarkdown remarkPlugins={[remarkGfm]}>
+                    {title}
+                  </PreactMarkdown>
                 </div>
               </a>
             </Slider.Item>
@@ -181,7 +189,7 @@ export default function BannnerGrid({
           </Slider.NextButton>
         </div>
 
-        <SliderJS rootId={id} />
+        <SliderJS rootId={id} scrollPerPage={false} />
       </div>
       {/* </div> */}
     </section>

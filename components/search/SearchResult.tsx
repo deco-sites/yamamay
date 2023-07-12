@@ -8,6 +8,7 @@ import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
 import type { LoaderReturnType } from "$live/types.ts";
 import type { ProductListingPage } from "deco-sites/std/commerce/types.ts";
 import Breadcrumb from "deco-sites/fashion/components/ui/Breadcrumb.tsx";
+import Pagination from "deco-sites/yamamay/components/search/Pagination.tsx";
 
 export interface Props {
   page: LoaderReturnType<ProductListingPage | null>;
@@ -60,35 +61,8 @@ function Result({
             <ProductGallery products={products} />
           </div>
         </div>
-
-        <div class="flex justify-center my-4">
-          <div class="btn-group">
-            <a
-              aria-label="previous page link"
-              rel="prev"
-              href={pageInfo.previousPage ?? "#"}
-              class="btn btn-ghost"
-            >
-              <Icon id="ChevronLeft" width={20} height={20} strokeWidth={2} />
-            </a>
-            <span class="btn btn-ghost">
-              Page {pageInfo.currentPage}
-            </span>
-            <a
-              aria-label="next page link"
-              rel="next"
-              href={pageInfo.nextPage ?? "#"}
-              class="btn btn-ghost"
-            >
-              <Icon
-                id="ChevronRight"
-                width={20}
-                height={20}
-                strokeWidth={2}
-              />
-            </a>
-          </div>
-        </div>
+        {console.log(pageInfo)}
+        <Pagination pageInfo={pageInfo} maxItems={7} />
       </div>
       <SendEventOnLoad
         event={{

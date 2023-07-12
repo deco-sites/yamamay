@@ -5,6 +5,7 @@ interface Props {
   scroll?: "smooth" | "auto";
   interval?: number;
   infinite?: boolean;
+  scrollPerPage?: boolean;
 }
 
 const ATTRIBUTES = {
@@ -46,7 +47,9 @@ const isHTMLElement = (x: Element): x is HTMLElement =>
   // deno-lint-ignore no-explicit-any
   typeof (x as any).offsetLeft === "number";
 
-const setup = ({ rootId, scroll, interval, infinite }: Props) => {
+const setup = (
+  { rootId, scroll, interval, infinite, scrollPerPage }: Props,
+) => {
   const root = document.getElementById(rootId);
   const slider = root?.querySelector(`[${ATTRIBUTES["data-slider"]}]`);
   const items = root?.querySelectorAll(`[${ATTRIBUTES["data-slider-item"]}]`);
@@ -111,7 +114,9 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
     const pageIndex = Math.floor(indices[indices.length - 1] / itemsPerPage);
 
     goToItem(
-      isShowingFirst ? items.length - 1 : (pageIndex - 1) * itemsPerPage,
+      isShowingFirst
+        ? items.length - 1
+        : (pageIndex - 1) * (scrollPerPage ? itemsPerPage : 1),
     );
   };
 
@@ -123,7 +128,9 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
     const isShowingLast = indices[indices.length - 1] === items.length - 1;
     const pageIndex = Math.floor(indices[0] / itemsPerPage);
 
-    goToItem(isShowingLast ? 0 : (pageIndex + 1) * itemsPerPage);
+    goToItem(
+      isShowingLast ? 0 : (pageIndex + 1) * (scrollPerPage ? itemsPerPage : 1),
+    );
   };
 
   const observer = new IntersectionObserver(
@@ -189,13 +196,18 @@ function Slider({
   scroll = "smooth",
   interval,
   infinite = false,
+  scrollPerPage = true,
 }: Props) {
-  useEffect(() => setup({ rootId, scroll, interval, infinite }), [
-    rootId,
-    scroll,
-    interval,
-    infinite,
-  ]);
+  useEffect(
+    () => setup({ rootId, scroll, interval, infinite, scrollPerPage }),
+    [
+      rootId,
+      scroll,
+      interval,
+      infinite,
+      scrollPerPage,
+    ],
+  );
 
   return <div data-slider-controller-js />;
 }
