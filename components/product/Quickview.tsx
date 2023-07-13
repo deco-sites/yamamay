@@ -14,7 +14,7 @@ import { useOffer } from "deco-sites/fashion/sdk/useOffer.ts";
 import { formatPrice } from "deco-sites/fashion/sdk/format.ts";
 import type { LoaderReturnType } from "$live/types.ts";
 import type { ProductDetailsPage } from "deco-sites/std/commerce/types.ts";
-import SendEventOnLoad from "deco-sites/fashion/components/SendEventOnLoad.tsx";
+import { SendEventOnLoad } from "deco-sites/fashion/sdk/analytics.tsx";
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
 
 import ProductSelector from "./ProductVariantSelector.tsx";

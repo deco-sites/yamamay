@@ -32,6 +32,12 @@ export interface Props {
   href: string;
   bannerPosition: "right" | "left";
   full?: boolean;
+  /**
+   * @format color
+   * @default #00000000
+   * @description Will be a transparent if not specified
+   */
+  backgroundColor?: string;
 }
 
 function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
@@ -85,6 +91,7 @@ function BannerFull(
     href,
     bannerPosition = "left",
     full,
+    backgroundColor = "transparent",
   }: Props,
 ) {
   const id = useId();
@@ -92,6 +99,7 @@ function BannerFull(
   return (
     <div
       id={id}
+      style={{ backgroundColor: backgroundColor }}
       class={`${full ? "" : "max-w-[1220px] mx-auto"} flex ${
         bannerPosition === "right"
           ? "flex-col-reverse lg:flex-row-reverse"

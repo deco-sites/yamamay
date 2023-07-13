@@ -17,6 +17,7 @@ export type Item = StringItem | IconItem;
 export type HighlightedItem = {
   label: string;
   href: string;
+  newTab?: boolean;
 } & IconItem;
 
 export type Section = {
@@ -88,6 +89,7 @@ function Footer(
               <li class="py-4 ">
                 <a
                   href={item.href}
+                  target={item.newTab ? "_blank" : "_self"}
                   class="uppercase lg:font-bold underline text-base items-center text-center lg:items-start lg:text-left flex gap-2 flex-col lg:flex-row"
                 >
                   <Icon

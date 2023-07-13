@@ -31,7 +31,7 @@ function pagesNumbersToDisplay(
 }
 
 function Pagination({ pageInfo, maxItems }: Props) {
-  const totalPages = pageInfo.records! / pageInfo.recordPerPage!;
+  const totalPages = Math.ceil(pageInfo.records! / pageInfo.recordPerPage!);
 
   const pages = pagesNumbersToDisplay(
     pageInfo.currentPage,

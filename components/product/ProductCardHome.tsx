@@ -5,7 +5,7 @@ import { useOffer } from "deco-sites/fashion/sdk/useOffer.ts";
 import { formatPrice } from "deco-sites/fashion/sdk/format.ts";
 import { useVariantPossibilities } from "deco-sites/fashion/sdk/useVariantPossiblities.ts";
 import { mapProductToAnalyticsItem } from "deco-sites/std/commerce/utils/productToAnalyticsItem.ts";
-import { sendEventOnClick } from "deco-sites/fashion/sdk/analytics.ts";
+import { SendEventOnClick } from "$store/sdk/analytics.tsx";
 import type { Product } from "deco-sites/std/commerce/types.ts";
 import Quickview from "deco-sites/yamamay/islands/Quickview.tsx";
 import SkuSelectorAddToCartButton from "deco-sites/yamamay/islands/SkuSelectorAddToCartButton.tsx";
@@ -38,27 +38,31 @@ function ProductCard({ product, preload, itemListName }: Props) {
   );
   const hasDiscount = price !== listPrice;
   const discount = ((listPrice ?? 0) - (price ?? 0)) * 100 / (listPrice ?? 0);
-  const clickEvent = {
-    name: "select_item" as const,
-    params: {
-      item_list_name: itemListName,
-      items: [
-        mapProductToAnalyticsItem({
-          product,
-          price,
-          listPrice,
-        }),
-      ],
-    },
-  };
+
+  const id = `product-card-${productID}`;
 
   return (
     <div
+      id={id}
       class="card card-compact group w-full rounded-none"
       data-deco="view-product"
-      id={`product-card-${productID}`}
-      {...sendEventOnClick(clickEvent)}
     >
+      <SendEventOnClick
+        id={id}
+        event={{
+          name: "select_item" as const,
+          params: {
+            item_list_name: itemListName,
+            items: [
+              mapProductToAnalyticsItem({
+                product,
+                price,
+                listPrice,
+              }),
+            ],
+          },
+        }}
+      />
       <figure class="relative">
         <a href={url} aria-label="view product" class="contents">
           <Image
